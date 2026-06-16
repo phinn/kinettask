@@ -1,168 +1,650 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>KinetTask — Privacy Policy</title>
-<meta name="description" content="KinetTask is a 100% on-device AI task manager. We do not collect your data.">
+<title>KinetTask — 本地 AI 任务管理 · 完全离线 · 0 上传</title>
+<meta name="description" content="KinetTask 是一款本地优先的 AI 任务管理器。自然语言一句话变任务, Apple Foundation Models 设备端推理, 0 上传 0 追踪。比 Reminders 聪明, 比 Todoist 私密, 比 Things 懂你。">
+<meta property="og:title" content="KinetTask — 本地 AI 任务管理">
+<meta property="og:description" content="完全离线 · 0 上传 · 设备端 AI · 免费">
+<meta property="og:type" content="website">
 <style>
-  :root {
-    --ink: #1a1b1e; --muted: #5a5d66; --line: #e4e6eb; --bg: #ffffff;
-    --tint: #f5f6f8; --accent: #2e5aac; --green: #1a7f4b;
+  :root{
+    --bg:#07070b; --bg-soft:#0e0e16; --surface:#13131e; --surface-2:#1a1a28;
+    --border:rgba(255,255,255,.07); --border-strong:rgba(255,255,255,.13);
+    --text:#f5f5fa; --text-dim:#a6a6b8; --text-faint:#68687880;
+    --violet:#6B5CF2; --teal:#33C7D9; --red:#FF6B6B; --green:#34C759;
+    --orange:#FF9500; --magenta:#AF52DE; --yellow:#FFD60A; --blue:#5ac8fa;
+    --grad:linear-gradient(120deg,#6B5CF2 0%,#AF52DE 50%,#33C7D9 100%);
+    --maxw:1140px;
   }
-  @media (prefers-color-scheme: dark) {
-    :root { --ink: #e8eaed; --muted: #9aa0aa; --line: #2a2c31; --bg:#15161a; --tint:#1d1f24; --accent:#7c9bf0; --green:#3fbf7a; }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","PingFang SC","Helvetica Neue",sans-serif;line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  ::selection{background:rgba(107,92,242,.4)}
+  a{color:inherit;text-decoration:none}
+
+  .ambient{position:fixed;inset:0;z-index:-1;overflow:hidden;pointer-events:none}
+  .blob{position:absolute;border-radius:50%;filter:blur(140px);opacity:.34;animation:float 24s ease-in-out infinite}
+  .blob.b1{width:640px;height:640px;background:#6B5CF2;top:-200px;left:-140px}
+  .blob.b2{width:560px;height:560px;background:#33C7D9;top:30%;right:-160px;animation-delay:-8s}
+  .blob.b3{width:480px;height:480px;background:#AF52DE;bottom:-200px;left:40%;animation-delay:-16s;opacity:.2}
+  @keyframes float{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(50px,-60px) scale(1.08)}66%{transform:translate(-40px,50px) scale(.94)}}
+
+  /* NAV */
+  nav{position:sticky;top:0;z-index:50;backdrop-filter:blur(20px) saturate(180%);-webkit-backdrop-filter:blur(20px) saturate(180%);background:rgba(7,7,11,.72);border-bottom:1px solid var(--border)}
+  .nav-in{max-width:var(--maxw);margin:0 auto;padding:13px 28px;display:flex;align-items:center;gap:20px}
+  .brand{display:flex;align-items:center;gap:11px;font-weight:800;letter-spacing:-.02em;font-size:16px}
+  .brand .logo{width:30px;height:30px;border-radius:8px;background:var(--grad);display:grid;place-items:center;color:#fff;font-size:15px;box-shadow:0 4px 18px rgba(107,92,242,.5);flex-shrink:0;position:relative;overflow:hidden}
+  .brand .logo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:8px}
+  .brand .tag{font-size:10.5px;font-weight:600;color:var(--text-faint);background:rgba(255,255,255,.06);padding:2px 7px;border-radius:5px;margin-left:2px}
+  .nav-links{margin-left:auto;display:flex;gap:4px;align-items:center}
+  .nav-links a{padding:7px 13px;border-radius:8px;font-size:13.5px;color:var(--text-dim);transition:.18s;font-weight:500}
+  .nav-links a:hover{color:var(--text);background:rgba(255,255,255,.06)}
+
+  /* CTA button */
+  .btn{display:inline-flex;align-items:center;gap:9px;padding:11px 20px;border-radius:11px;font-weight:700;font-size:14px;transition:.2s;cursor:pointer;border:none;font-family:inherit;white-space:nowrap}
+  .btn-apple{background:#fff;color:#000}
+  .btn-apple:hover{transform:translateY(-2px);box-shadow:0 12px 30px -8px rgba(255,255,255,.4)}
+  .btn-apple .soon{font-size:10px;font-weight:700;color:#fff;background:var(--orange);padding:2px 6px;border-radius:5px;letter-spacing:.04em}
+  .btn-ghost{background:rgba(255,255,255,.06);color:var(--text);border:1px solid var(--border-strong)}
+  .btn-ghost:hover{background:rgba(255,255,255,.1);transform:translateY(-2px)}
+  .btn-lg{padding:15px 28px;font-size:15.5px;border-radius:13px}
+
+  main{max-width:var(--maxw);margin:0 auto;padding:0 28px}
+  section{padding:96px 0;position:relative}
+  .eyebrow{display:inline-flex;align-items:center;gap:9px;font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--violet);margin-bottom:18px}
+  .eyebrow::before{content:"";width:20px;height:2px;background:var(--violet);border-radius:2px}
+  h2{font-size:clamp(30px,4.4vw,46px);font-weight:850;letter-spacing:-.035em;line-height:1.08;margin-bottom:16px}
+  h2 .accent{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .lede{font-size:18px;color:var(--text-dim);max-width:680px;margin-bottom:0;line-height:1.6}
+  .center{text-align:center}
+  .center .lede{margin:0 auto 0}
+  .section-head{margin-bottom:56px}
+
+  /* HERO */
+  .hero{padding:70px 0 50px;text-align:center}
+  .hero-badge{display:inline-flex;align-items:center;gap:9px;font-size:13px;font-weight:600;color:var(--text-dim);background:rgba(255,255,255,.05);border:1px solid var(--border);padding:7px 16px;border-radius:100px;margin-bottom:32px}
+  .hero-badge .dot{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 10px var(--green);animation:blink 2s infinite}
+  @keyframes blink{0%,100%{opacity:1}50%{opacity:.4}}
+  .hero h1{font-size:clamp(46px,8vw,88px);font-weight:900;letter-spacing:-.05em;line-height:.98;margin-bottom:26px}
+  .hero h1 .grad{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;background-size:200% auto;animation:shine 6s linear infinite}
+  @keyframes shine{to{background-position:200% center}}
+  .hero .sub{font-size:clamp(18px,2.4vw,23px);color:var(--text-dim);max-width:660px;margin:0 auto 38px;font-weight:400;letter-spacing:-.01em}
+  .hero .sub b{color:var(--text);font-weight:600}
+  .hero-cta{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-bottom:30px}
+  .hero-trust{display:flex;gap:26px;justify-content:center;flex-wrap:wrap;margin-bottom:64px}
+  .hero-trust .t{display:inline-flex;align-items:center;gap:7px;font-size:13.5px;color:var(--text-dim);font-weight:500}
+  .hero-trust .t .ic{font-size:14px}
+
+  /* ===== APP MOCKUP ===== */
+  .mockup-wrap{max-width:980px;margin:0 auto;perspective:1600px}
+  .mockup{background:linear-gradient(180deg,#1c1c2e 0%,#13131e 100%);border:1px solid var(--border-strong);border-radius:16px;box-shadow:0 60px 140px -40px rgba(0,0,0,.8),0 0 0 1px rgba(255,255,255,.04);overflow:hidden;transform:rotateX(6deg);transform-origin:center top;transition:transform .6s cubic-bezier(.2,.7,.2,1)}
+  .mockup:hover{transform:rotateX(2deg)}
+  .titlebar{height:34px;background:rgba(255,255,255,.03);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 14px;gap:7px}
+  .tl{width:12px;height:12px;border-radius:50%}
+  .tl.r{background:#FF5F57}.tl.y{background:#FEBC2E}.tl.g{background:#28C840}
+  .titlebar .tt{margin-left:auto;margin-right:auto;font-size:12px;color:var(--text-faint);font-weight:500;transform:translateX(-20px)}
+  .win{display:grid;grid-template-columns:210px 1fr;min-height:460px}
+  .side{background:rgba(0,0,0,.18);border-right:1px solid var(--border);padding:16px 12px;font-size:13px}
+  .side-h{font-size:10.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-faint);padding:0 8px;margin:14px 0 6px}
+  .side-h:first-child{margin-top:0}
+  .side-i{display:flex;align-items:center;gap:9px;padding:6px 8px;border-radius:7px;color:var(--text-dim);margin-bottom:1px;font-weight:500}
+  .side-i.act{background:rgba(107,92,242,.18);color:#fff}
+  .side-i .si{width:16px;text-align:center;font-size:13px}
+  .side-i .ct{margin-left:auto;font-size:11px;color:var(--text-faint);background:rgba(255,255,255,.05);padding:1px 6px;border-radius:5px}
+  .side-i.act .ct{background:rgba(255,255,255,.12);color:#fff}
+  .detail{padding:22px 26px;display:flex;flex-direction:column}
+  .detail-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+  .detail-top h4{font-size:21px;font-weight:800;letter-spacing:-.02em}
+  .detail-top .ic-search{font-size:15px;color:var(--text-faint)}
+  .insight{display:flex;align-items:center;gap:10px;background:rgba(255,149,0,.1);border:1px solid rgba(255,149,0,.25);border-radius:10px;padding:9px 13px;margin-bottom:16px;font-size:12.5px}
+  .insight .ii{font-size:15px}
+  .insight b{color:var(--orange)}
+  .insight span{color:var(--text-dim)}
+  .tasks{display:flex;flex-direction:column;gap:2px;flex:1}
+  .trow{display:flex;align-items:center;gap:12px;padding:8px 4px;border-radius:8px}
+  .trow .cb{width:19px;height:19px;border-radius:50%;border:2px solid var(--text-faint);flex-shrink:0;display:grid;place-items:center}
+  .trow.done .cb{background:var(--green);border-color:var(--green);color:#fff;font-size:11px}
+  .trow .info{flex:1;min-width:0}
+  .trow .tt2{font-size:13.5px;font-weight:500;display:flex;align-items:center;gap:8px}
+  .trow.done .tt2{color:var(--text-faint);text-decoration:line-through}
+  .trow .pri{font-size:10px;font-weight:700;padding:2px 7px;border-radius:5px}
+  .pri.urgent{background:rgba(255,107,107,.16);color:var(--red)}
+  .pri.high{background:rgba(255,149,0,.16);color:var(--orange)}
+  .trow .meta{font-size:11px;color:var(--text-faint);margin-top:2px;display:flex;gap:8px;align-items:center}
+  .trow .tagc{font-size:10px;color:var(--text-dim);background:rgba(255,255,255,.07);padding:1px 6px;border-radius:5px}
+  .trow .meta .late{color:var(--red)}
+  .trow .chev{color:var(--text-faint);font-size:11px}
+  .sub-rows{margin-left:31px;display:flex;flex-direction:column;gap:1px}
+  .trow.sub{padding:5px 4px}
+  .trow.sub .tt2{font-size:12px;font-family:"SF Mono",ui-monospace,monospace;color:var(--text-dim)}
+  .trow.sub .cb{width:15px;height:15px}
+  .inputbar{margin-top:auto;padding-top:14px;border-top:1px solid var(--border);display:flex;align-items:center;gap:10px}
+  .inputbar .ib-inner{flex:1;background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:9px;padding:8px 13px;font-size:13px;color:var(--text-dim);display:flex;align-items:center;gap:8px}
+  .inputbar .cursor{width:1.5px;height:14px;background:var(--violet);animation:cur 1s step-end infinite}
+  @keyframes cur{50%{opacity:0}}
+  .inputbar .spark{color:var(--magenta);font-size:14px}
+
+  /* feature grid */
+  .grid{display:grid;gap:18px}
+  .g3{grid-template-columns:repeat(3,1fr)}
+  .g2{grid-template-columns:repeat(2,1fr)}
+  .card{background:linear-gradient(180deg,var(--surface) 0%,var(--bg-soft) 100%);border:1px solid var(--border);border-radius:20px;padding:30px;transition:.28s;position:relative;overflow:hidden}
+  .card:hover{transform:translateY(-5px);border-color:var(--border-strong);box-shadow:0 26px 60px -24px rgba(0,0,0,.7)}
+  .card .ic{width:48px;height:48px;border-radius:13px;display:grid;place-items:center;font-size:23px;margin-bottom:18px}
+  .card h3{font-size:19px;font-weight:750;letter-spacing:-.01em;margin-bottom:9px}
+  .card p{font-size:14.5px;color:var(--text-dim);line-height:1.6}
+
+  /* NL DEMO */
+  .nl-demo{background:linear-gradient(180deg,var(--surface) 0%,var(--bg-soft) 100%);border:1px solid var(--border-strong);border-radius:24px;padding:48px;max-width:860px;margin:0 auto}
+  .nl-input{background:rgba(0,0,0,.3);border:1px solid var(--border);border-radius:14px;padding:18px 22px;font-size:19px;font-weight:500;display:flex;align-items:center;gap:10px;margin-bottom:28px}
+  .nl-input .typed{color:var(--text)}
+  .nl-input .cur{width:2px;height:22px;background:var(--violet);border-radius:1px;animation:cur 1s step-end infinite}
+  .nl-arrow{text-align:center;color:var(--violet);font-size:22px;margin-bottom:24px}
+  .nl-result{background:rgba(107,92,242,.06);border:1px solid rgba(107,92,242,.25);border-radius:14px;padding:20px 24px}
+  .nl-row{display:flex;align-items:center;gap:14px;padding:7px 0;font-size:14.5px}
+  .nl-row .k{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--text-faint);width:78px;flex-shrink:0}
+  .nl-row .v{font-weight:600}
+  .nl-row .v.title{font-size:16px}
+  .nl-row .chip{font-size:11px;font-weight:700;padding:3px 9px;border-radius:6px}
+
+  /* three tier */
+  .tiers{display:grid;gap:14px;max-width:780px;margin:0 auto}
+  .tier{display:grid;grid-template-columns:60px 1fr auto;gap:20px;align-items:center;background:var(--surface);border:1px solid var(--border);border-radius:18px;padding:22px 26px;transition:.25s}
+  .tier:hover{transform:translateX(6px);border-color:var(--border-strong)}
+  .tier .ring{width:60px;height:60px;border-radius:16px;display:grid;place-items:center;font-size:26px;border:1px solid var(--border-strong)}
+  .tier h4{font-size:16.5px;font-weight:750;margin-bottom:3px;display:flex;align-items:center;gap:9px;flex-wrap:wrap}
+  .tier p{font-size:13.5px;color:var(--text-dim);line-height:1.55}
+  .tier .tn{font-family:"SF Mono",ui-monospace,monospace;font-size:11px;color:var(--text-faint);writing-mode:vertical-rl;letter-spacing:.2em;font-weight:700}
+  .tier .pill-s{font-size:10.5px;font-weight:700;padding:3px 8px;border-radius:6px}
+  .tier .fallback-row{grid-column:1/-1;text-align:center;color:var(--text-faint);font-size:12.5px;font-weight:600}
+  .tier .fallback-row span{color:var(--orange)}
+
+  /* privacy manifesto */
+  .privacy{background:radial-gradient(circle at 20% 0%,rgba(52,199,89,.14),transparent 55%),var(--surface);border:1px solid rgba(52,199,89,.25);border-radius:28px;padding:56px 48px;position:relative;overflow:hidden}
+  .privacy .lock{position:absolute;top:-30px;right:30px;font-size:180px;color:rgba(52,199,89,.05);line-height:1}
+  .privacy h2{max-width:680px}
+  .privacy .plede{font-size:17px;color:var(--text-dim);max-width:640px;margin:18px 0 36px;line-height:1.7}
+  .privacy .plede b{color:#fff}
+  .priv-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;position:relative}
+  .priv{background:rgba(0,0,0,.25);border:1px solid var(--border);border-radius:16px;padding:24px}
+  .priv .ic{font-size:24px;margin-bottom:12px}
+  .priv h4{font-size:15px;font-weight:750;margin-bottom:6px}
+  .priv p{font-size:13px;color:var(--text-dim);line-height:1.55}
+  .audit{margin-top:24px;display:inline-flex;align-items:center;gap:10px;font-size:13.5px;color:var(--green);background:rgba(52,199,89,.1);border:1px solid rgba(52,199,89,.3);padding:11px 18px;border-radius:12px;font-weight:600}
+
+  /* compare strip */
+  .cmp{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  .cmp-card{border:1px solid var(--border);border-radius:18px;padding:28px;background:var(--surface);text-align:center;transition:.25s}
+  .cmp-card:hover{transform:translateY(-4px);border-color:var(--border-strong)}
+  .cmp-card .nm{font-size:18px;font-weight:750;margin-bottom:4px}
+  .cmp-card .tag{font-size:12px;color:var(--text-faint);margin-bottom:18px}
+  .cmp-card .line{font-size:13.5px;color:var(--text-dim);padding:8px 0;border-top:1px solid var(--border);line-height:1.5}
+  .cmp-card .line:first-of-type{border-top:none}
+  .cmp-card .line b{color:var(--red);font-weight:600}
+  .cmp-vs{display:flex;align-items:center;justify-content:center;gap:14px;margin:26px 0 0;font-size:14px;color:var(--text-dim);font-weight:600}
+  .cmp-vs .arrow{color:var(--violet);font-size:18px}
+
+  /* states strip */
+  .states{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top:10px}
+  .state{display:flex;align-items:center;gap:9px;padding:12px 18px;border-radius:12px;border:1px solid var(--border);background:var(--surface);font-weight:600;font-size:14px}
+  .state .si{font-size:16px}
+
+  /* FAQ */
+  .faq{max-width:760px;margin:0 auto}
+  .faq-item{border:1px solid var(--border);border-radius:14px;margin-bottom:12px;background:var(--surface);overflow:hidden;transition:.2s}
+  .faq-item summary{padding:20px 24px;font-size:16px;font-weight:650;cursor:pointer;list-style:none;display:flex;align-items:center;justify-content:space-between;gap:16px}
+  .faq-item summary::-webkit-details-marker{display:none}
+  .faq-item summary::after{content:"+";font-size:22px;color:var(--violet);font-weight:300;transition:.2s}
+  .faq-item[open] summary::after{transform:rotate(45deg)}
+  .faq-item .ans{padding:0 24px 22px;font-size:14.5px;color:var(--text-dim);line-height:1.65}
+  .faq-item .ans b{color:var(--text)}
+
+  /* final CTA */
+  .final{background:radial-gradient(circle at 50% 0%,rgba(107,92,242,.22),transparent 60%),var(--surface);border:1px solid var(--border-strong);border-radius:28px;padding:72px 40px;text-align:center}
+  .final .ic{width:76px;height:76px;border-radius:20px;background:var(--grad);display:grid;place-items:center;font-size:38px;color:#fff;margin:0 auto 26px;box-shadow:0 20px 50px -10px rgba(107,92,242,.6);position:relative;overflow:hidden}
+  .final .ic img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:20px}
+  .final h2{margin-bottom:16px}
+  .final .sub{font-size:17px;color:var(--text-dim);max-width:520px;margin:0 auto 34px}
+  .final-cta{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+
+  footer{padding:64px 0 80px;border-top:1px solid var(--border);margin-top:60px}
+  .foot-in{max-width:var(--maxw);margin:0 auto;padding:0 28px;display:flex;flex-wrap:wrap;gap:32px;align-items:flex-start;justify-content:space-between}
+  .foot-brand{max-width:320px}
+  .foot-brand .fb{display:flex;align-items:center;gap:11px;font-weight:800;font-size:17px;margin-bottom:12px}
+  .foot-brand .fb .logo{width:30px;height:30px;border-radius:8px;background:var(--grad);display:grid;place-items:center;font-size:15px;position:relative;overflow:hidden}
+  .foot-brand .fb .logo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:8px}
+  .foot-brand p{font-size:13.5px;color:var(--text-dim);line-height:1.6}
+  .foot-cols{display:flex;gap:56px;flex-wrap:wrap}
+  .foot-col h5{font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-faint);margin-bottom:14px}
+  .foot-col a{display:block;font-size:14px;color:var(--text-dim);padding:5px 0;transition:.18s}
+  .foot-col a:hover{color:var(--text)}
+  .foot-bottom{max-width:var(--maxw);margin:48px auto 0;padding:24px 28px 0;border-top:1px solid var(--border);display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;font-size:12.5px;color:var(--text-faint)}
+
+  .reveal{opacity:0;transform:translateY(28px);transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1)}
+  .reveal.in{opacity:1;transform:none}
+
+  @media(max-width:880px){
+    .g3,.cmp,.priv-grid{grid-template-columns:1fr}
+    .g2{grid-template-columns:1fr}
+    .win{grid-template-columns:1fr}
+    .side{display:none}
+    .nav-links{display:none}
+    .hero-trust{gap:16px}
+    .tier{grid-template-columns:54px 1fr;gap:14px}.tier .tn{display:none}
+    .nl-demo,.privacy,.final{padding:32px 22px}
+    .mockup{transform:none}
   }
-  * { box-sizing: border-box; }
-  body {
-    margin: 0; background: var(--bg); color: var(--ink);
-    font: 16px/1.7 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    -webkit-font-smoothing: antialiased;
-  }
-  .wrap { max-width: 760px; margin: 0 auto; padding: 48px 24px 96px; }
-  header { border-bottom: 1px solid var(--line); padding-bottom: 28px; margin-bottom: 32px; }
-  h1 { font-size: 30px; margin: 0 0 6px; letter-spacing: -0.01em; }
-  .sub { color: var(--muted); font-size: 15px; }
-  .badge {
-    display: inline-block; margin-top: 14px; padding: 7px 12px; border-radius: 999px;
-    background: color-mix(in srgb, var(--green) 14%, transparent); color: var(--green);
-    font-size: 13px; font-weight: 600;
-  }
-  h2 { font-size: 21px; margin: 40px 0 10px; letter-spacing: -0.01em; }
-  h3 { font-size: 16px; margin: 22px 0 6px; }
-  p, li { color: var(--ink); }
-  ul { padding-left: 20px; }
-  .muted { color: var(--muted); }
-  code, .mono {
-    font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
-    font-size: 14px; background: var(--tint); padding: 2px 6px; border-radius: 5px;
-  }
-  .callout {
-    background: var(--tint); border: 1px solid var(--line); border-radius: 12px;
-    padding: 16px 18px; margin: 18px 0;
-  }
-  .callout strong { color: var(--accent); }
-  .net-table { width: 100%; border-collapse: collapse; margin: 14px 0; font-size: 15px; }
-  .net-table th, .net-table td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
-  .net-table th { color: var(--muted); font-weight: 600; font-size: 13px; text-transform: uppercase; letter-spacing: .04em; }
-  a { color: var(--accent); }
-  hr { border: 0; border-top: 1px solid var(--line); margin: 40px 0; }
-  footer { color: var(--muted); font-size: 14px; margin-top: 48px; }
 </style>
 </head>
 <body>
-<div class="wrap">
+<div class="ambient"><div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div></div>
 
-<header>
-  <h1>KinetTask Privacy Policy</h1>
-  <div class="sub">Last updated: June 16, 2026</div>
-  <span class="badge">✓ We do not collect your data</span>
-</header>
+<nav>
+  <div class="nav-in">
+    <a href="#top" class="brand">
+      <span class="logo">✓<img src="../AppIcon/icon.iconset/icon_512x512@2x.png" alt=""></span>
+      KinetTask
+    </a>
+    <div class="nav-links">
+      <a href="#features">功能</a>
+      <a href="#magic">自然语言</a>
+      <a href="#privacy">隐私</a>
+      <a href="#compare">对比</a>
+      <a href="#faq">FAQ</a>
+    </div>
+    <!-- App Store ID: 6780944289 已接入。审核通过、上架后去掉下面 .soon「即将上线」徽章即可。 -->
+    <a class="btn btn-apple" href="https://apps.apple.com/app/id6780944289" style="margin-left:auto">
+      <svg width="15" height="17" viewBox="0 0 384 512" fill="currentColor"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
+      App Store <span class="soon">即将上线</span>
+    </a>
+  </div>
+</nav>
 
-<p>KinetTask is an AI task manager that runs <strong>100% on your device</strong>. This policy
-explains honestly how KinetTask handles your information. The short version:
-<strong>your tasks, notes, and all AI processing happen only on your device. We collect nothing,
-upload nothing, and track no one.</strong></p>
+<main id="top">
 
-<div class="callout">
-  <strong>In short:</strong> KinetTask has no account, no cloud backend, no analytics SDK, no
-  advertising, and no tracking. The only network activity is downloading public model files when
-  you explicitly request them — it never sends your content anywhere.
-</div>
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-badge"><span class="dot"></span> Local AI Task Manager · 完全离线 · 即将上架</div>
+  <h1>让你的任务库<br><span class="grad">真正懂你</span></h1>
+  <p class="sub">KinetTask 是一款<b>本地优先</b>的 AI 任务管理器。一句话变任务, <b>Apple Foundation Models 设备端推理</b>, 0 上传 0 追踪。比 Reminders 聪明, 比 Todoist 私密, 比 Things 懂你。</p>
+  <div class="hero-cta">
+    <a class="btn btn-apple btn-lg" href="https://apps.apple.com/app/id6780944289">
+      <svg width="16" height="18" viewBox="0 0 384 512" fill="currentColor"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
+      App Store <span class="soon">即将上线</span>
+    </a>
+    <a class="btn btn-ghost btn-lg" href="#magic">看自然语言魔法 ↓</a>
+  </div>
+  <div class="hero-trust">
+    <span class="t"><span class="ic">🔒</span> 0 上传</span>
+    <span class="t"><span class="ic">🤖</span> 设备端 AI</span>
+    <span class="t"><span class="ic">💎</span> 免费 · 无限任务</span>
+    <span class="t"><span class="ic">📱</span> iPhone + Mac</span>
+  </div>
 
-<h2>1. Information We Collect</h2>
-<p><strong>None.</strong> KinetTask does not collect any personal data, including:</p>
-<ul>
-  <li>No usage or analytics data</li>
-  <li>No crash reporting (no crash-reporting SDK is integrated)</li>
-  <li>No advertising tracking or user profiling (no IDFA, no device fingerprinting)</li>
-  <li>No registration or login — there is no account system</li>
-  <li>Your tasks, notes, tags, or anything you type are never uploaded</li>
-</ul>
+  <!-- APP MOCKUP -->
+  <div class="mockup-wrap reveal">
+    <div class="mockup">
+      <div class="titlebar">
+        <span class="tl r"></span><span class="tl y"></span><span class="tl g"></span>
+        <span class="tt">KinetTask</span>
+      </div>
+      <div class="win">
+        <div class="side">
+          <div class="side-h">任务</div>
+          <div class="side-i"><span class="si">📥</span> 收件箱</div>
+          <div class="side-i act"><span class="si">☀️</span> 今天 <span class="ct">5</span></div>
+          <div class="side-i"><span class="si">📅</span> 即将 <span class="ct">3</span></div>
+          <div class="side-i"><span class="si">♾️</span> 任何时候</div>
+          <div class="side-i"><span class="si">🌙</span> 也许将来</div>
+          <div class="side-i"><span class="si">✅</span> 已完成</div>
+          <div class="side-h">项目</div>
+          <div class="side-i"><span class="si" style="color:#6B5CF2">💼</span> 工作 <span class="ct">4</span></div>
+          <div class="side-i"><span class="si" style="color:#33C7D9">👤</span> 个人 <span class="ct">2</span></div>
+          <div class="side-i"><span class="si" style="color:#8C4DD9">📚</span> 学习 <span class="ct">1</span></div>
+        </div>
+        <div class="detail">
+          <div class="detail-top">
+            <h4>今天</h4>
+            <span class="ic-search">🔍</span>
+          </div>
+          <div class="insight">
+            <span class="ii">🔥</span>
+            <span><b>今天排了 5 件</b> · 有点满, 考虑把不急的挪一挪</span>
+          </div>
+          <div class="tasks">
+            <div class="trow">
+              <div class="cb"></div>
+              <div class="info">
+                <div class="tt2">完成产品评审纪要 <span class="pri urgent">紧急</span></div>
+                <div class="meta"><span class="late">⏰ 逾期 · 今天 09:00</span> <span class="tagc">#工作</span></div>
+              </div>
+              <span class="chev">›</span>
+            </div>
+            <div class="trow">
+              <div class="cb"></div>
+              <div class="info">
+                <div class="tt2">给设计稿反馈 <span class="pri high">高</span></div>
+                <div class="meta"><span>📅 今天 14:30</span> <span class="tagc">#设计</span></div>
+              </div>
+              <span class="chev">›</span>
+            </div>
+            <div class="trow">
+              <div class="cb"></div>
+              <div class="info">
+                <div class="tt2">准备周会汇报材料</div>
+                <div class="meta"><span>📅 今天 16:00</span> <span class="tagc">#工作</span></div>
+              </div>
+              <span class="chev">›</span>
+            </div>
+            <div class="sub-rows">
+              <div class="trow sub">
+                <div class="cb"></div>
+                <div class="tt2">拉本周关键数据</div>
+              </div>
+              <div class="trow sub">
+                <div class="cb"></div>
+                <div class="tt2">画 3 页关键流程图</div>
+              </div>
+            </div>
+            <div class="trow done">
+              <div class="cb">✓</div>
+              <div class="info"><div class="tt2">回客户邮件</div></div>
+            </div>
+          </div>
+          <div class="inputbar">
+            <div class="ib-inner"><span class="spark">✨</span> 明天下午 3 点开周会<span class="cursor"></span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-<h2>2. Where Your Data Lives</h2>
-<p>All of your task data is stored in a <strong>local database on your device</strong>, inside the
-app's sandbox container:</p>
-<ul>
-  <li><span class="mono">tasks.sqlite3</span> — task data</li>
-  <li><span class="mono">search.sqlite3</span> — full-text search index (FTS5)</li>
-  <li><span class="mono">projects.sqlite3</span> — project data</li>
-</ul>
-<p class="muted">macOS: <span class="mono">~/Library/Containers/com.kitnet.task.app/Data/Library/Application Support/KinetTask/</span><br>
-These files belong to you. You can back them up at any time with Time Machine or any backup tool.</p>
+<!-- MAGIC / NL DEMO -->
+<section id="magic">
+  <div class="center reveal" style="margin-bottom:52px">
+    <div class="eyebrow" style="justify-content:center">杀手锏</div>
+    <h2>说一句话, <span class="accent">它替你想好</span></h2>
+    <p class="lede" style="margin:0 auto">不用填表单, 不用挑日期。KinetTask 在你的设备上读懂自然语言, 自动拆出标题、截止时间、优先级和标签。</p>
+  </div>
+  <div class="nl-demo reveal">
+    <div class="nl-input"><span style="color:var(--magenta)">✨</span><span class="typed" id="typed"></span><span class="cur"></span></div>
+    <div class="nl-arrow">↓</div>
+    <div class="nl-result">
+      <div class="nl-row"><span class="k">标题</span><span class="v title">开周会</span></div>
+      <div class="nl-row"><span class="k">截止</span><span class="v">明天 15:00 → 自动归入「即将」</span></div>
+      <div class="nl-row"><span class="k">优先级</span><span class="v"><span class="chip" style="background:rgba(255,149,0,.16);color:var(--orange)">high 高</span></span></div>
+      <div class="nl-row"><span class="k">标签</span><span class="v"><span class="chip" style="background:rgba(51,199,217,.16);color:var(--teal)">#工作</span> <span class="chip" style="background:rgba(51,199,217,.16);color:var(--teal)">#会议</span></span></div>
+    </div>
+  </div>
+</section>
 
-<h2>3. How the AI Works (Fully On-Device)</h2>
-<p>KinetTask's AI features (natural-language parsing, task breakdown, related-task suggestions,
-daily insights) <strong>run entirely on your device</strong>:</p>
-<ul>
-  <li><strong>Apple Foundation Models</strong> — the system's built-in on-device model (macOS 26 / iOS 26).</li>
-  <li><strong>Local GGUF models (Llama.cpp)</strong> — a model you choose to download, running in-process on your device.</li>
-</ul>
-<p><strong>The App Store build offers no remote (cloud) AI.</strong> Your task content never leaves
-the device for AI processing. Even with no model loaded, KinetTask falls back to built-in rules for
-basic date and priority parsing.</p>
+<!-- FEATURES -->
+<section id="features">
+  <div class="center reveal section-head">
+    <div class="eyebrow" style="justify-content:center">功能</div>
+    <h2>聪明、私密、<span class="accent">清爽</span></h2>
+    <p class="lede" style="margin:0 auto">该有的都有, 不该有的(云端、追踪、订阅)一个没有。</p>
+  </div>
+  <div class="grid g3 reveal">
+    <div class="card">
+      <div class="ic" style="background:rgba(107,92,242,.16);color:var(--violet)">🧠</div>
+      <h3>设备端 AI 推理</h3>
+      <p>macOS 26 / iOS 26 用 Apple Foundation Models, 零下载零配置; 其他设备跑你选的本地模型; 都没有就用内置规则解析。全程不离设备。</p>
+    </div>
+    <div class="card">
+      <div class="ic" style="background:rgba(255,149,0,.16);color:var(--orange)">✨</div>
+      <h3>每日洞察</h3>
+      <p>扫描整个任务库, 主动提醒逾期、今天/明天过载、时间冲突、重要却没排期。从"记录"升级到"理解"。</p>
+    </div>
+    <div class="card">
+      <div class="ic" style="background:rgba(52,199,89,.16);color:var(--green)">🔒</div>
+      <h3>0 上传 · 可证明</h3>
+      <p>任务存在本地 SQLite, 无 analytics、无 crash reporter、无第三方追踪。App 内置隐私审计面板, 落点一目了然。</p>
+    </div>
+    <div class="card">
+      <div class="ic" style="background:rgba(51,199,217,.16);color:var(--teal)">🔎</div>
+      <h3>全文搜索</h3>
+      <p>FTS5 驱动的实时搜索, 跨标题、备注、标签。输入即出结果, unicode 分词对中文友好。</p>
+    </div>
+    <div class="card">
+      <div class="ic" style="background:rgba(175,82,222,.16);color:var(--magenta)">🗂️</div>
+      <h3>项目分类</h3>
+      <p>Things 式 Areas。侧栏浏览项目、看任务数、新建删除, 按工作 / 个人 / 学习归类。</p>
+    </div>
+    <div class="card">
+      <div class="ic" style="background:rgba(90,200,250,.16);color:var(--blue)">📱</div>
+      <h3>iPhone + Mac</h3>
+      <p>一套代码双端, SwiftUI 原生体验。自适应布局, 手机电脑都顺手。</p>
+    </div>
+  </div>
+</section>
 
-<h2>4. Network Usage (Stated Honestly)</h2>
-<p>KinetTask works offline by default. It makes a network request <strong>only when you actively
-download a model file</strong>, fetching <strong>public, open-source model files</strong> that
-contain none of your data:</p>
+<!-- THREE TIER ENGINE -->
+<section id="engine">
+  <div class="center reveal section-head">
+    <div class="eyebrow" style="justify-content:center">三层引擎</div>
+    <h2>永远<span class="accent">点亮</span>, 永不离线</h2>
+    <p class="lede" style="margin:0 auto">按设备能力自动降级, 但规则兜底保证"一句话变任务"在任何机器上都成立。</p>
+  </div>
+  <div class="tiers reveal">
+    <div class="tier">
+      <div class="ring" style="background:rgba(107,92,242,.16);color:var(--violet)">🍎</div>
+      <div><h4>Apple Foundation Models <span class="pill-s" style="background:rgba(52,199,89,.16);color:var(--green)">首选</span></h4><p>macOS 26 / iOS 26 系统内置, 0 下载, 进程内推理。</p></div>
+      <div class="tn">TIER 01</div>
+    </div>
+    <div class="fallback-row">▼ 不可用则降级 <span>↓</span></div>
+    <div class="tier">
+      <div class="ring" style="background:rgba(51,199,217,.16);color:var(--teal)">🦙</div>
+      <div><h4>本地 GGUF 模型</h4><p>其他能跑的设备: 下载你选的 GGUF, 进程内 Llama.cpp 推理。</p></div>
+      <div class="tn">TIER 02</div>
+    </div>
+    <div class="fallback-row">▼ 不可用则降级 <span>↓</span></div>
+    <div class="tier">
+      <div class="ring" style="background:rgba(52,199,89,.16);color:var(--green)">📜</div>
+      <div><h4>规则解析 <span class="pill-s" style="background:rgba(255,149,0,.16);color:var(--orange)">永远兜底</span></h4><p>零依赖正则引擎, 读懂中文日期、时段、优先级、标签。无需任何模型。</p></div>
+      <div class="tn">TIER 03</div>
+    </div>
+  </div>
+</section>
 
-<table class="net-table">
-  <tr><th>Activity</th><th>Network?</th><th>Details</th></tr>
-  <tr><td>Creating, editing, deleting tasks; AI parsing; search</td><td>No</td><td>Fully offline</td></tr>
-  <tr><td>Downloading a GGUF model</td><td>Yes</td><td>Fetches a public model file from HuggingFace (optionally via the hf-mirror.com mirror). Only triggered by you; sends no user data.</td></tr>
-</table>
-<p class="muted">Aside from the above, KinetTask makes no outbound network connections. The source code is auditable.</p>
+<!-- PRIVACY MANIFESTO -->
+<section id="privacy">
+  <div class="privacy reveal">
+    <div class="lock">🔒</div>
+    <div class="eyebrow" style="color:var(--green)"><span style="background:var(--green)"></span>隐私, 是承诺也是工程</div>
+    <h2>你的任务, <span class="accent">只在你口袋里</span></h2>
+    <p class="plede">KinetTask <b>没有服务器</b>。你的待办内容从不离开设备 —— 不是写在隐私政策里的漂亮话, 是用<b>沙盒权限 + 仅设备端引擎 + 零第三方 SDK</b>三重保证的。你可以亲眼看见数据落点, 甚至抓包验证。</p>
+    <div class="priv-grid">
+      <div class="priv">
+        <div class="ic">🚫</div>
+        <h4>无分析 SDK</h4>
+        <p>不接任何 analytics、不埋点、不上报使用数据。</p>
+      </div>
+      <div class="priv">
+        <div class="ic">📦</div>
+        <h4>本地 SQLite</h4>
+        <p>所有任务、搜索索引、项目都在你硬盘的 Application Support 里。</p>
+      </div>
+      <div class="priv">
+        <div class="ic">🤖</div>
+        <h4>仅设备端引擎</h4>
+        <p>App Store 版只提供 Apple FM / 本地 GGUF, 没有远端 LLM。</p>
+      </div>
+    </div>
+    <div class="audit">🔍 应用内「隐私审计」面板: 任务数、数据库大小、模型大小, 一目了然</div>
+  </div>
+</section>
 
-<h2>5. Permissions</h2>
-<p>KinetTask <strong>does not request</strong> camera, microphone, location, contacts, photos,
-health, or any other sensitive system permission. If you import a local GGUF model via the file
-picker, the app reads only that file within the scope you grant.</p>
+<!-- COMPARE -->
+<section id="compare">
+  <div class="center reveal section-head">
+    <div class="eyebrow" style="justify-content:center">为什么是 KinetTask</div>
+    <h2>又聪明,<span class="accent"> 又私密</span></h2>
+    <p class="lede" style="margin:0 auto">其他 app 各占一格 —— Reminders 聪明但要上云, Things 私密但不会 AI, Todoist 强大但靠你的数据养模型。KinetTask 占那个空白的交集。</p>
+  </div>
+  <div class="cmp reveal">
+    <div class="cmp-card">
+      <div class="nm">🍎 Apple Reminders</div>
+      <div class="tag">免费 · 原生</div>
+      <div class="line">✓ 设备端 AI</div>
+      <div class="line"><b>✕ 默认 iCloud 上云</b></div>
+      <div class="line"><b>✕ 模型封死, 不能换</b></div>
+    </div>
+    <div class="cmp-card">
+      <div class="nm">📋 Todoist / TickTick</div>
+      <div class="tag">订阅 · 云端</div>
+      <div class="line">✓ AI / 解析极强</div>
+      <div class="line"><b>✕ 任务文本发去云端</b></div>
+      <div class="line"><b>✕ 护城河需要你的数据</b></div>
+    </div>
+    <div class="cmp-card" style="border-color:var(--violet);background:linear-gradient(180deg,rgba(107,92,242,.1),var(--surface))">
+      <div class="nm" style="background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent">✓ KinetTask</div>
+      <div class="tag">免费 · 本地优先</div>
+      <div class="line">✓ 设备端 AI 推理</div>
+      <div class="line">✓ 0 上传, 可审计</div>
+      <div class="line">✓ 自选模型</div>
+    </div>
+  </div>
+  <div class="cmp-vs reveal"><span>比 Reminders 聪明</span><span class="arrow">·</span><span>比 Todoist 私密</span><span class="arrow">·</span><span>比 Things 懂你</span></div>
+</section>
 
-<h2>6. Third-Party Components</h2>
-<p>KinetTask uses the following open-source components, none of which transmit data:</p>
-<ul>
-  <li><strong>LocalLLMKit</strong> (MIT) — local LLM inference abstraction, runs on-device.</li>
-  <li><strong>SQLite.swift</strong> (MIT) — local database wrapper.</li>
-  <li><strong>Apple FoundationModels</strong> (system framework) — on-device AI.</li>
-</ul>
-<p>Downloaded models are open-weight models (such as Qwen2.5 / Qwen3) governed by their respective open-source licenses.</p>
+<!-- DESIGN / STATES -->
+<section id="design">
+  <div class="center reveal section-head">
+    <div class="eyebrow" style="justify-content:center">熟悉的设计</div>
+    <h2>Things 式<span class="accent"> 六段状态</span></h2>
+    <p class="lede" style="margin:0 auto">不做花里胡哨。点一下完成, 划一下删除, 点一下编辑。该克制的地方克制。</p>
+  </div>
+  <div class="states reveal">
+    <span class="state"><span class="si">📥</span> 收件箱</span>
+    <span class="state"><span class="si">☀️</span> 今天</span>
+    <span class="state"><span class="si">📅</span> 即将</span>
+    <span class="state"><span class="si">♾️</span> 任何时候</span>
+    <span class="state"><span class="si">🌙</span> 也许将来</span>
+    <span class="state"><span class="si">✅</span> 已完成</span>
+  </div>
+</section>
 
-<h2>7. Data Security</h2>
-<p>Because all data stays in the local app sandbox and is protected by the macOS / iOS app sandbox
-and system encryption, there is no risk of your data being transmitted to us or any third-party
-server. App Sandbox and Hardened Runtime are enabled.</p>
+<!-- FAQ -->
+<section id="faq">
+  <div class="center reveal section-head">
+    <div class="eyebrow" style="justify-content:center">常见问题</div>
+    <h2>你大概<span class="accent">想问的</span></h2>
+  </div>
+  <div class="faq reveal">
+    <details class="faq-item" open>
+      <summary>数据真的不上传吗?</summary>
+      <div class="ans">是的。任务存在本地 SQLite, 无 analytics、无 crash reporter、无第三方追踪。App Store 版只提供设备端 AI 引擎, 没有任何远端 LLM。你可以用应用内的「隐私审计」面板查看数据落点, 甚至<b>抓包验证</b>。</div>
+    </details>
+    <details class="faq-item">
+      <summary>跟免费的 Apple Reminders 比, 凭什么?</summary>
+      <div class="ans">Reminders 在 iOS 26 也设备端化、也能自然语言建任务了 —— 但它<b>默认 iCloud 上云</b>, 且模型<b>封死</b>。KinetTask 永不联网, 还能让你<b>自选模型</b>, 并对整个任务库做推理(每日洞察、冲突检测、任务拆解)。</div>
+    </details>
+    <details class="faq-item">
+      <summary>没有网络 / 没 Apple FM 的设备能用吗?</summary>
+      <div class="ans">能。KinetTask 三层引擎会自动降级: Apple FM 不可用就跑你下载的本地 GGUF 模型; 连模型都没有, <b>内置规则解析器</b>照样能读懂"明天下午 3 点开会"。完全离线也点得亮。</div>
+    </details>
+    <details class="faq-item">
+      <summary>是免费的吗?</summary>
+      <div class="ans">v1 <b>完全免费, 无限任务, 无内购</b>。一次安装永久使用。未来 Pro 功能在当前版本不展示。</div>
+    </details>
+    <details class="faq-item">
+      <summary>支持哪些设备?</summary>
+      <div class="ans">macOS 14+ 与 iOS 17+。Apple Foundation Models 需 macOS 26 / iOS 26; 旧系统降级本地模型或规则解析。不支持 Linux / Windows —— Apple FM、WidgetKit 都是 Apple 独占, 跨平台是另一个产品。</div>
+    </details>
+    <details class="faq-item">
+      <summary>任务会丢吗?</summary>
+      <div class="ans">不会。本地 SQLite + WAL 日志, 即使 app 崩溃任务也在硬盘上。重启即从磁盘读回全部任务。</div>
+    </details>
+  </div>
+</section>
 
-<h2>8. Your Rights (Your Data Belongs to You)</h2>
-<ul>
-  <li><strong>Export</strong>: Your data is the local database file listed above — copy it to back it up anytime.</li>
-  <li><strong>Delete</strong>: Delete tasks inside the app, or simply uninstall the app to erase all data completely.</li>
-  <li><strong>No account to delete</strong>: KinetTask has no account, so there is no account-deletion step required.</li>
-</ul>
+<!-- FINAL CTA -->
+<section>
+  <div class="final reveal">
+    <div class="ic">✓<img src="../AppIcon/icon.iconset/icon_512x512@2x.png" alt=""></div>
+    <h2>准备好, <span class="accent">让任务库懂你了</span></h2>
+    <p class="sub">聪明、私密、免费。即将上架 App Store。</p>
+    <div class="final-cta">
+      <!-- App Store ID: 6780944289 已接入。上架后可去掉 .soon 徽章。 -->
+      <a class="btn btn-apple btn-lg" href="https://apps.apple.com/app/id6780944289">
+        <svg width="16" height="18" viewBox="0 0 384 512" fill="currentColor"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
+        App Store <span class="soon">即将上线</span>
+      </a>
+    </div>
+  </div>
+</section>
 
-<h2>9. Children</h2>
-<p>KinetTask is not directed at children under 13 and does not knowingly collect any information
-from children. The App Store age rating is 4+.</p>
-
-<h2>10. iCloud Sync</h2>
-<p><strong>The current version (1.x) does not offer iCloud sync.</strong> Related code exists but is
-disabled by default. If a future version provides it, sync would occur through your private iCloud
-database under your Apple ID, encrypted end-to-end by Apple, and <strong>only if you explicitly
-enable it</strong>. We will update this policy before that happens. You could turn it off at any
-time in System Settings.</p>
-
-<h2>11. Changes to This Policy</h2>
-<p>If we make material changes to this policy, we will notify you with the app update or on this
-page. Continued use constitutes acceptance of the updated policy.</p>
-
-<hr>
+</main>
 
 <footer>
-  <p><strong>Contact</strong><br>
-  phinn@outlook.com</p>
-  <p class="muted">This policy applies to the macOS and iOS versions of KinetTask. © 2026 KinetTask.</p>
+  <div class="foot-in">
+    <div class="foot-brand">
+      <div class="fb"><span class="logo">✓<img src="../AppIcon/icon.iconset/icon_512x512@2x.png" alt=""></span> KinetTask</div>
+      <p>本地优先的 AI 任务管理器。比 Reminders 聪明, 比 Todoist 私密, 比 Things 懂你。</p>
+    </div>
+    <div class="foot-cols">
+      <div class="foot-col">
+        <h5>产品</h5>
+        <a href="#features">功能</a>
+        <a href="#magic">自然语言</a>
+        <a href="#engine">三层引擎</a>
+        <a href="#design">设计</a>
+      </div>
+      <div class="foot-col">
+        <h5>关于</h5>
+        <a href="#privacy">隐私承诺</a>
+        <a href="#compare">竞品对比</a>
+        <a href="#faq">常见问题</a>
+        <a href="https://taskflow.app/privacy">隐私政策</a>
+      </div>
+      <div class="foot-col">
+        <h5>获取</h5>
+        <!-- App Store ID: 6780944289 已接入。 -->
+        <a href="https://apps.apple.com/app/id6780944289">App Store · 即将上线</a>
+        <a href="mailto:phinn@outlook.com">联系开发者</a>
+      </div>
+    </div>
+  </div>
+  <div class="foot-bottom">
+    <span>© 2026 KinetTask · MIT License</span>
+    <span>com.kitnet.task.app · Built with SwiftUI + Apple Foundation Models</span>
+  </div>
 </footer>
 
-</div>
+<script>
+  // scroll reveal
+  const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.12,rootMargin:'0px 0px -40px 0px'});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+  // nav active highlight
+  const links=[...document.querySelectorAll('.nav-links a')];
+  const secs=links.map(l=>document.querySelector(l.getAttribute('href'))).filter(Boolean);
+  const spy=new IntersectionObserver((es)=>{es.forEach(s=>{if(s.isIntersecting){links.forEach(l=>l.style.color='');const a=links.find(l=>l.getAttribute('href')==='#'+s.target.id);if(a)a.style.color='var(--text)';}});},{rootMargin:'-45% 0px -50% 0px'});
+  secs.forEach(s=>spy.observe(s));
+
+  // typewriter for NL demo
+  const typedEl=document.getElementById('typed');
+  const phrases=['明天下午 3 点开周会','周五前交季度报告 #紧急','下周一上午 10 点跟设计评审'];
+  let pi=0,ci=0,deleting=false;
+  function tick(){
+    const cur=phrases[pi];
+    if(!deleting){
+      typedEl.textContent=cur.slice(0,++ci);
+      if(ci===cur.length){deleting=true;return setTimeout(tick,1900);}
+    }else{
+      typedEl.textContent=cur.slice(0,--ci);
+      if(ci===0){deleting=false;pi=(pi+1)%phrases.length;}
+    }
+    setTimeout(tick,deleting?45:80);
+  }
+  // start typing when demo scrolls into view
+  const demoSpy=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){tick();demoSpy.disconnect();}});},{threshold:.4});
+  const demoSec=document.getElementById('magic');
+  if(demoSec)demoSpy.observe(demoSec);
+</script>
 </body>
 </html>
