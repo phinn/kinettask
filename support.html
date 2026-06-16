@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KinetTask — Support</title>
+<meta name="description" content="Get help with KinetTask. Contact, FAQ, and how to manage your data.">
+<style>
+  :root {
+    --ink: #1a1b1e; --muted: #5a5d66; --line: #e4e6eb; --bg: #ffffff;
+    --tint: #f5f6f8; --accent: #2e5aac;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --ink: #e8eaed; --muted: #9aa0aa; --line: #2a2c31; --bg:#15161a; --tint:#1d1f24; --accent:#7c9bf0; }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--ink);
+    font: 16px/1.7 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 760px; margin: 0 auto; padding: 48px 24px 96px; }
+  header { border-bottom: 1px solid var(--line); padding-bottom: 28px; margin-bottom: 32px; }
+  h1 { font-size: 30px; margin: 0 0 6px; letter-spacing: -0.01em; }
+  .sub { color: var(--muted); font-size: 15px; }
+  h2 { font-size: 21px; margin: 40px 0 10px; letter-spacing: -0.01em; }
+  p, li { color: var(--ink); }
+  ul { padding-left: 20px; }
+  .muted { color: var(--muted); }
+  code, .mono {
+    font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+    font-size: 14px; background: var(--tint); padding: 2px 6px; border-radius: 5px;
+  }
+  .callout {
+    background: var(--tint); border: 1px solid var(--line); border-radius: 12px;
+    padding: 16px 18px; margin: 18px 0;
+  }
+  .btn {
+    display: inline-block; margin-top: 10px; padding: 10px 16px; border-radius: 10px;
+    background: var(--accent); color: #fff; text-decoration: none; font-weight: 600;
+  }
+  a { color: var(--accent); }
+  hr { border: 0; border-top: 1px solid var(--line); margin: 40px 0; }
+  footer { color: var(--muted); font-size: 14px; margin-top: 48px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <h1>KinetTask Support</h1>
+  <div class="sub">An on-device AI task manager for iPhone &amp; Mac</div>
+</header>
+
+<p>Need a hand? Here's how to get the most out of KinetTask — and how to reach us.</p>
+
+<a class="btn" href="mailto:phinn@outlook.com">Email support ✉️</a>
+
+<h2>Frequently asked</h2>
+
+<h3>Where is my data stored?</h3>
+<p>Entirely on your device, inside the app's sandbox. Nothing is uploaded. On macOS you'll find
+the local database at <span class="mono">~/Library/Containers/com.kitnet.task.app/Data/Library/Application Support/KinetTask/</span>.
+You can back it up with Time Machine or any backup tool.</p>
+
+<h3>How do I delete all my data?</h3>
+<p>Delete your tasks inside the app, or simply uninstall KinetTask — that removes everything.
+There is no account to delete because KinetTask has no accounts.</p>
+
+<h3>The AI (task breakdown / related tasks) isn't doing much.</h3>
+<p>Those features work best with a <strong>3B-or-larger local model</strong> or
+<strong>Apple Foundation Models</strong> (macOS 26 / iOS 26). Open <em>Settings → AI</em> and
+load a larger model. With a very small model or none loaded, KinetTask falls back to built-in
+rule-based parsing — it still captures tasks correctly, just with less AI reasoning.</p>
+
+<h3>Natural-language capture isn't parsing the date.</h3>
+<p>Try phrasing the time explicitly (e.g. "tomorrow 3pm" / "明天下午3点"). Even without a model,
+KinetTask's rule parser handles common dates and times; loading a model improves title and tag
+extraction.</p>
+
+<h3>Does KinetTask sync between my devices?</h3>
+<p>Not in this version. Everything stays local by design (that's the privacy promise). iCloud
+sync may come as an opt-in feature in a future release.</p>
+
+<h2>Privacy</h2>
+<div class="callout">
+  KinetTask collects no data — no analytics, no crash reporting, no tracking, no account.
+  Read the full <a href="privacy.html">Privacy Policy</a>.
+</div>
+
+<h2>Contact</h2>
+<ul>
+  <li><strong>Email:</strong> <a href="mailto:phinn@outlook.com">phinn@outlook.com</a></li>
+  <li>Include your macOS / iOS version and a short description of the issue.</li>
+</ul>
+
+<hr>
+<footer>
+  <p class="muted">© 2026 KinetTask. Your tasks, only on your device.</p>
+</footer>
+
+</div>
+</body>
+</html>
