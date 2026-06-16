@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KinetTask — Privacy Policy</title>
+<meta name="description" content="KinetTask is a 100% on-device AI task manager. We do not collect your data.">
+<style>
+  :root {
+    --ink: #1a1b1e; --muted: #5a5d66; --line: #e4e6eb; --bg: #ffffff;
+    --tint: #f5f6f8; --accent: #2e5aac; --green: #1a7f4b;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --ink: #e8eaed; --muted: #9aa0aa; --line: #2a2c31; --bg:#15161a; --tint:#1d1f24; --accent:#7c9bf0; --green:#3fbf7a; }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--ink);
+    font: 16px/1.7 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 760px; margin: 0 auto; padding: 48px 24px 96px; }
+  header { border-bottom: 1px solid var(--line); padding-bottom: 28px; margin-bottom: 32px; }
+  h1 { font-size: 30px; margin: 0 0 6px; letter-spacing: -0.01em; }
+  .sub { color: var(--muted); font-size: 15px; }
+  .badge {
+    display: inline-block; margin-top: 14px; padding: 7px 12px; border-radius: 999px;
+    background: color-mix(in srgb, var(--green) 14%, transparent); color: var(--green);
+    font-size: 13px; font-weight: 600;
+  }
+  h2 { font-size: 21px; margin: 40px 0 10px; letter-spacing: -0.01em; }
+  h3 { font-size: 16px; margin: 22px 0 6px; }
+  p, li { color: var(--ink); }
+  ul { padding-left: 20px; }
+  .muted { color: var(--muted); }
+  code, .mono {
+    font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+    font-size: 14px; background: var(--tint); padding: 2px 6px; border-radius: 5px;
+  }
+  .callout {
+    background: var(--tint); border: 1px solid var(--line); border-radius: 12px;
+    padding: 16px 18px; margin: 18px 0;
+  }
+  .callout strong { color: var(--accent); }
+  .net-table { width: 100%; border-collapse: collapse; margin: 14px 0; font-size: 15px; }
+  .net-table th, .net-table td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  .net-table th { color: var(--muted); font-weight: 600; font-size: 13px; text-transform: uppercase; letter-spacing: .04em; }
+  a { color: var(--accent); }
+  hr { border: 0; border-top: 1px solid var(--line); margin: 40px 0; }
+  footer { color: var(--muted); font-size: 14px; margin-top: 48px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <h1>KinetTask Privacy Policy</h1>
+  <div class="sub">Last updated: June 16, 2026</div>
+  <span class="badge">✓ We do not collect your data</span>
+</header>
+
+<p>KinetTask is an AI task manager that runs <strong>100% on your device</strong>. This policy
+explains honestly how KinetTask handles your information. The short version:
+<strong>your tasks, notes, and all AI processing happen only on your device. We collect nothing,
+upload nothing, and track no one.</strong></p>
+
+<div class="callout">
+  <strong>In short:</strong> KinetTask has no account, no cloud backend, no analytics SDK, no
+  advertising, and no tracking. The only network activity is downloading public model files when
+  you explicitly request them — it never sends your content anywhere.
+</div>
+
+<h2>1. Information We Collect</h2>
+<p><strong>None.</strong> KinetTask does not collect any personal data, including:</p>
+<ul>
+  <li>No usage or analytics data</li>
+  <li>No crash reporting (no crash-reporting SDK is integrated)</li>
+  <li>No advertising tracking or user profiling (no IDFA, no device fingerprinting)</li>
+  <li>No registration or login — there is no account system</li>
+  <li>Your tasks, notes, tags, or anything you type are never uploaded</li>
+</ul>
+
+<h2>2. Where Your Data Lives</h2>
+<p>All of your task data is stored in a <strong>local database on your device</strong>, inside the
+app's sandbox container:</p>
+<ul>
+  <li><span class="mono">tasks.sqlite3</span> — task data</li>
+  <li><span class="mono">search.sqlite3</span> — full-text search index (FTS5)</li>
+  <li><span class="mono">projects.sqlite3</span> — project data</li>
+</ul>
+<p class="muted">macOS: <span class="mono">~/Library/Containers/com.kitnet.task.app/Data/Library/Application Support/KinetTask/</span><br>
+These files belong to you. You can back them up at any time with Time Machine or any backup tool.</p>
+
+<h2>3. How the AI Works (Fully On-Device)</h2>
+<p>KinetTask's AI features (natural-language parsing, task breakdown, related-task suggestions,
+daily insights) <strong>run entirely on your device</strong>:</p>
+<ul>
+  <li><strong>Apple Foundation Models</strong> — the system's built-in on-device model (macOS 26 / iOS 26).</li>
+  <li><strong>Local GGUF models (Llama.cpp)</strong> — a model you choose to download, running in-process on your device.</li>
+</ul>
+<p><strong>The App Store build offers no remote (cloud) AI.</strong> Your task content never leaves
+the device for AI processing. Even with no model loaded, KinetTask falls back to built-in rules for
+basic date and priority parsing.</p>
+
+<h2>4. Network Usage (Stated Honestly)</h2>
+<p>KinetTask works offline by default. It makes a network request <strong>only when you actively
+download a model file</strong>, fetching <strong>public, open-source model files</strong> that
+contain none of your data:</p>
+
+<table class="net-table">
+  <tr><th>Activity</th><th>Network?</th><th>Details</th></tr>
+  <tr><td>Creating, editing, deleting tasks; AI parsing; search</td><td>No</td><td>Fully offline</td></tr>
+  <tr><td>Downloading a GGUF model</td><td>Yes</td><td>Fetches a public model file from HuggingFace (optionally via the hf-mirror.com mirror). Only triggered by you; sends no user data.</td></tr>
+</table>
+<p class="muted">Aside from the above, KinetTask makes no outbound network connections. The source code is auditable.</p>
+
+<h2>5. Permissions</h2>
+<p>KinetTask <strong>does not request</strong> camera, microphone, location, contacts, photos,
+health, or any other sensitive system permission. If you import a local GGUF model via the file
+picker, the app reads only that file within the scope you grant.</p>
+
+<h2>6. Third-Party Components</h2>
+<p>KinetTask uses the following open-source components, none of which transmit data:</p>
+<ul>
+  <li><strong>LocalLLMKit</strong> (MIT) — local LLM inference abstraction, runs on-device.</li>
+  <li><strong>SQLite.swift</strong> (MIT) — local database wrapper.</li>
+  <li><strong>Apple FoundationModels</strong> (system framework) — on-device AI.</li>
+</ul>
+<p>Downloaded models are open-weight models (such as Qwen2.5 / Qwen3) governed by their respective open-source licenses.</p>
+
+<h2>7. Data Security</h2>
+<p>Because all data stays in the local app sandbox and is protected by the macOS / iOS app sandbox
+and system encryption, there is no risk of your data being transmitted to us or any third-party
+server. App Sandbox and Hardened Runtime are enabled.</p>
+
+<h2>8. Your Rights (Your Data Belongs to You)</h2>
+<ul>
+  <li><strong>Export</strong>: Your data is the local database file listed above — copy it to back it up anytime.</li>
+  <li><strong>Delete</strong>: Delete tasks inside the app, or simply uninstall the app to erase all data completely.</li>
+  <li><strong>No account to delete</strong>: KinetTask has no account, so there is no account-deletion step required.</li>
+</ul>
+
+<h2>9. Children</h2>
+<p>KinetTask is not directed at children under 13 and does not knowingly collect any information
+from children. The App Store age rating is 4+.</p>
+
+<h2>10. iCloud Sync</h2>
+<p><strong>The current version (1.x) does not offer iCloud sync.</strong> Related code exists but is
+disabled by default. If a future version provides it, sync would occur through your private iCloud
+database under your Apple ID, encrypted end-to-end by Apple, and <strong>only if you explicitly
+enable it</strong>. We will update this policy before that happens. You could turn it off at any
+time in System Settings.</p>
+
+<h2>11. Changes to This Policy</h2>
+<p>If we make material changes to this policy, we will notify you with the app update or on this
+page. Continued use constitutes acceptance of the updated policy.</p>
+
+<hr>
+
+<footer>
+  <p><strong>Contact</strong><br>
+  phinn@outlook.com</p>
+  <p class="muted">This policy applies to the macOS and iOS versions of KinetTask. © 2026 KinetTask.</p>
+</footer>
+
+</div>
+</body>
+</html>
