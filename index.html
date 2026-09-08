@@ -37,10 +37,15 @@
   .brand{display:flex;align-items:center;gap:11px;font-weight:800;letter-spacing:-.02em;font-size:16px}
   .brand .logo{width:30px;height:30px;border-radius:8px;background:var(--grad);display:grid;place-items:center;color:#fff;font-size:15px;box-shadow:0 4px 18px rgba(107,92,242,.5);flex-shrink:0;position:relative;overflow:hidden}
   .brand .logo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:8px}
-  .brand .tag{font-size:10.5px;font-weight:600;color:var(--text-faint);background:rgba(255,255,255,.06);padding:2px 7px;border-radius:5px;margin-left:2px}
   .nav-links{margin-left:auto;display:flex;gap:4px;align-items:center}
   .nav-links a{padding:7px 13px;border-radius:8px;font-size:13.5px;color:var(--text-dim);transition:.18s;font-weight:500}
   .nav-links a:hover{color:var(--text);background:rgba(255,255,255,.06)}
+
+  /* LANG SWITCH */
+  .lang-sw{display:flex;gap:2px;background:rgba(255,255,255,.06);border:1px solid var(--border);border-radius:9px;padding:3px}
+  .lang-sw button{border:none;background:transparent;color:var(--text-dim);font-family:inherit;font-size:11.5px;font-weight:650;padding:4px 9px;border-radius:6px;cursor:pointer;transition:.15s;letter-spacing:.02em}
+  .lang-sw button:hover{color:var(--text)}
+  .lang-sw button.on{background:var(--grad);color:#fff;box-shadow:0 2px 10px rgba(107,92,242,.4)}
 
   /* CTA button */
   .btn{display:inline-flex;align-items:center;gap:9px;padding:11px 20px;border-radius:11px;font-weight:700;font-size:14px;transition:.2s;cursor:pointer;border:none;font-family:inherit;white-space:nowrap}
@@ -158,8 +163,8 @@
   .tier p{font-size:13.5px;color:var(--text-dim);line-height:1.55}
   .tier .tn{font-family:"SF Mono",ui-monospace,monospace;font-size:11px;color:var(--text-faint);writing-mode:vertical-rl;letter-spacing:.2em;font-weight:700}
   .tier .pill-s{font-size:10.5px;font-weight:700;padding:3px 8px;border-radius:6px}
-  .tier .fallback-row{grid-column:1/-1;text-align:center;color:var(--text-faint);font-size:12.5px;font-weight:600}
-  .tier .fallback-row span{color:var(--orange)}
+  .tiers .fallback-row{grid-column:1/-1;text-align:center;color:var(--text-faint);font-size:12.5px;font-weight:600}
+  .tiers .fallback-row span{color:var(--orange)}
 
   /* privacy manifesto */
   .privacy{background:radial-gradient(circle at 20% 0%,rgba(52,199,89,.14),transparent 55%),var(--surface);border:1px solid rgba(52,199,89,.25);border-radius:28px;padding:56px 48px;position:relative;overflow:hidden}
@@ -213,7 +218,7 @@
   .foot-in{max-width:var(--maxw);margin:0 auto;padding:0 28px;display:flex;flex-wrap:wrap;gap:32px;align-items:flex-start;justify-content:space-between}
   .foot-brand{max-width:320px}
   .foot-brand .fb{display:flex;align-items:center;gap:11px;font-weight:800;font-size:17px;margin-bottom:12px}
-  .foot-brand .fb .logo{width:30px;height:30px;border-radius:8px;background:var(--grad);display:grid;place-items:center;font-size:15px;position:relative;overflow:hidden}
+  .foot-brand .fb .logo{width:30px;height:30px;border-radius:8px;background:var(--grad);display:grid;place-items:center;color:#fff;font-size:15px;position:relative;overflow:hidden}
   .foot-brand .fb .logo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:8px}
   .foot-brand p{font-size:13.5px;color:var(--text-dim);line-height:1.6}
   .foot-cols{display:flex;gap:56px;flex-wrap:wrap}
@@ -248,22 +253,30 @@
       KinetTask
     </a>
     <div class="nav-links">
-      <a href="#features">功能</a>
-      <a href="#magic">自然语言</a>
-      <a href="#privacy">隐私</a>
-      <a href="#compare">对比</a>
-      <a href="#faq">FAQ</a>
+      <a href="#features" data-i="nav1">功能</a>
+      <a href="#magic" data-i="nav2">自然语言</a>
+      <a href="#privacy" data-i="nav3">隐私</a>
+      <a href="#compare" data-i="nav4">对比</a>
+      <a href="#faq" data-i="nav5">FAQ</a>
+    </div>
+    <div class="lang-sw" id="langSw">
+      <button data-lang="zh-Hans" class="on">简</button>
+      <button data-lang="zh-Hant">繁</button>
+      <button data-lang="en">EN</button>
+      <button data-lang="ja">日</button>
     </div>
     <!-- App Store ID: 6780944289 已接入。审核通过、上架后去掉下面 .soon「即将上线」徽章即可。 -->
     <a class="btn btn-apple" href="https://apps.apple.com/app/id6780944289" style="margin-left:auto">
       <svg width="15" height="17" viewBox="0 0 384 512" fill="currentColor"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
-      App Store <span class="soon">即将上线</span>
+      App Store <span class="soon" data-i="soon">即将上线</span>
     </a>
   </div>
 </nav>
 
 <main id="top">
 
+<!-- zh-Hans -->
+<section class="lang-block" data-lang="zh-Hans" hidden>
 <!-- HERO -->
 <section class="hero">
   <div class="hero-badge"><span class="dot"></span> Local AI Task Manager · 完全离线 · 即将上架</div>
@@ -337,6 +350,14 @@
                 <div class="meta"><span>📅 今天 16:00</span> <span class="tagc">#工作</span></div>
               </div>
               <span class="chev">›</span>
+            </div>
+            <div class="trow">
+              <div class="cb"></div>
+              <div class="info">
+                <div class="tt2">准备季度汇报 <span class="pri high">高</span></div>
+                <div class="meta"><span>📅 周五 10:00</span></div>
+              </div>
+              <span class="chev">⌄</span>
             </div>
             <div class="sub-rows">
               <div class="trow sub">
@@ -549,7 +570,7 @@
     </details>
     <details class="faq-item">
       <summary>是免费的吗?</summary>
-      <div class="ans">v1 <b>完全免费, 无限任务, 无内购</b>。一次安装永久使用。未来 Pro 功能在当前版本不展示。</div>
+      <div class="ans">免费版即可日常使用(最多 50 条活跃任务), <b>无订阅</b>。Pro 是<b>一次性买断</b>, 解锁无限任务、AI 任务拆解、推理搜索与主题定制 —— 买一次, 名下所有设备永久可用。</div>
     </details>
     <details class="faq-item">
       <summary>支持哪些设备?</summary>
@@ -577,35 +598,977 @@
     </div>
   </div>
 </section>
+</section>
+
+<!-- zh-Hant -->
+<section class="lang-block" data-lang="zh-Hant" hidden>
+<section class="hero">
+  <div class="hero-badge"><span class="dot"></span> Local AI Task Manager · 完全離線 · 即將上架</div>
+  <h1>讓你的任務庫<br><span class="grad">真正懂你</span></h1>
+  <p class="sub">KinetTask 是一款<b>本地優先</b>的 AI 任務管理器。一句話變任務, <b>Apple Foundation Models 設備端推理</b>, 0 上傳 0 追蹤。比 Reminders 聰明, 比 Todoist 私密, 比 Things 懂你。</p>
+  <div class="hero-cta">
+    <a class="btn btn-apple btn-lg" href="https://apps.apple.com/app/id6780944289">
+      <svg width="16" height="18" viewBox="0 0 384 512" fill="currentColor"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
+      App Store <span class="soon">即將上架</span>
+    </a>
+    <a class="btn btn-ghost btn-lg" href="#magic-zh-Hant">看自然語言魔法 ↓</a>
+  </div>
+  <div class="hero-trust">
+    <span class="t"><span class="ic">🔒</span> 0 上傳</span>
+    <span class="t"><span class="ic">🤖</span> 設備端 AI</span>
+    <span class="t"><span class="ic">💎</span> 免費 · 無限任務</span>
+    <span class="t"><span class="ic">📱</span> iPhone + Mac</span>
+  </div>
+
+  <div class="mockup-wrap reveal">
+    <div class="mockup">
+      <div class="titlebar">
+        <span class="tl r"></span><span class="tl y"></span><span class="tl g"></span>
+        <span class="tt">KinetTask</span>
+      </div>
+      <div class="win">
+        <div class="side">
+          <div class="side-h">任務</div>
+          <div class="side-i"><span class="si">📥</span> 收件匣</div>
+          <div class="side-i act"><span class="si">☀️</span> 今天 <span class="ct">5</span></div>
+          <div class="side-i"><span class="si">📅</span> 即將 <span class="ct">3</span></div>
+          <div class="side-i"><span class="si">♾️</span> 任何時候</div>
+          <div class="side-i"><span class="si">🌙</span> 也許將來</div>
+          <div class="side-i"><span class="si">✅</span> 已完成</div>
+          <div class="side-h">專案</div>
+          <div class="side-i"><span class="si" style="color:#6B5CF2">💼</span> 工作 <span class="ct">4</span></div>
+          <div class="side-i"><span class="si" style="color:#33C7D9">👤</span> 個人 <span class="ct">2</span></div>
+          <div class="side-i"><span class="si" style="color:#8C4DD9">📚</span> 學習 <span class="ct">1</span></div>
+        </div>
+        <div class="detail">
+          <div class="detail-top">
+            <h4>今天</h4>
+            <span class="ic-search">🔍</span>
+          </div>
+          <div class="insight">
+            <span class="ii">🔥</span>
+            <span><b>今天排了 5 件</b> · 有點滿, 考慮把不急的挪一挪</span>
+          </div>
+          <div class="tasks">
+            <div class="trow">
+              <div class="cb"></div>
+              <div class="info">
+                <div class="tt2">完成產品評審紀要 <span class="pri urgent">緊急</span></div>
+                <div class="meta"><span class="late">⏰ 逾期 · 今天 09:00</span> <span class="tagc">#工作</span></div>
+              </div>
+              <span class="chev">›</span>
+            </div>
+            <div class="trow">
+              <div class="cb"></div>
+              <div class="info">
+                <div class="tt2">給設計稿回饋 <span class="pri high">高</span></div>
+                <div class="meta"><span>📅 今天 14:30</span> <span class="tagc">#設計</span></div>
+              </div>
+              <span class="chev">›</span>
+            </div>
+            <div class="trow">
+              <div class="cb"></div>
+              <div class="info">
+                <div class="tt2">準備週會彙報材料</div>
+                <div class="meta"><span>📅 今天 16:00</span> <span class="tagc">#工作</span></div>
+              </div>
+              <span class="chev">›</span>
+            </div>
+            <div class="trow">
+              <div class="cb"></div>
+              <div class="info">
+                <div class="tt2">準備季度彙報 <span class="pri high">高</span></div>
+                <div class="meta"><span>📅 週五 10:00</span></div>
+              </div>
+              <span class="chev">⌄</span>
+            </div>
+            <div class="sub-rows">
+              <div class="trow sub">
+                <div class="cb"></div>
+                <div class="tt2">拉本週關鍵數據</div>
+              </div>
+              <div class="trow sub">
+                <div class="cb"></div>
+                <div class="tt2">畫 3 頁關鍵流程圖</div>
+              </div>
+            </div>
+            <div class="trow done">
+              <div class="cb">✓</div>
+              <div class="info"><div class="tt2">回客戶郵件</div></div>
+            </div>
+          </div>
+          <div class="inputbar">
+            <div class="ib-inner"><span class="spark">✨</span> 明天下午 3 點開週會<span class="cursor"></span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="magic-zh-Hant">
+  <div class="center reveal" style="margin-bottom:52px">
+    <div class="eyebrow" style="justify-content:center">殺手鐧</div>
+    <h2>說一句話, <span class="accent">它替你想好</span></h2>
+    <p class="lede" style="margin:0 auto">不用填表單, 不用挑日期。KinetTask 在你的設備上讀懂自然語言, 自動拆出標題、截止時間、優先級和標籤。</p>
+  </div>
+  <div class="nl-demo reveal">
+    <div class="nl-input"><span style="color:var(--magenta)">✨</span><span class="typed" id="typed-zh-Hant"></span><span class="cur"></span></div>
+    <div class="nl-arrow">↓</div>
+    <div class="nl-result">
+      <div class="nl-row"><span class="k">標題</span><span class="v title">開週會</span></div>
+      <div class="nl-row"><span class="k">截止</span><span class="v">明天 15:00 → 自動歸入「即將」</span></div>
+      <div class="nl-row"><span class="k">優先級</span><span class="v"><span class="chip" style="background:rgba(255,149,0,.16);color:var(--orange)">high 高</span></span></div>
+      <div class="nl-row"><span class="k">標籤</span><span class="v"><span class="chip" style="background:rgba(51,199,217,.16);color:var(--teal)">#工作</span> <span class="chip" style="background:rgba(51,199,217,.16);color:var(--teal)">#會議</span></span></div>
+    </div>
+  </div>
+</section>
+
+<section id="features-zh-Hant">
+  <div class="center reveal section-head">
+    <div class="eyebrow" style="justify-content:center">功能</div>
+    <h2>聰明、私密、<span class="accent">清爽</span></h2>
+    <p class="lede" style="margin:0 auto">該有的都有, 不該有的(雲端、追蹤、訂閱)一個沒有。</p>
+  </div>
+  <div class="grid g3 reveal">
+    <div class="card">
+      <div class="ic" style="background:rgba(107,92,242,.16);color:var(--violet)">🧠</div>
+      <h3>設備端 AI 推理</h3>
+      <p>macOS 26 / iOS 26 用 Apple Foundation Models, 零下載零設定; 其他設備跑你選的本地模型; 都沒有就用內建規則解析。全程不離設備。</p>
+    </div>
+    <div class="card">
+      <div class="ic" style="background:rgba(255,149,0,.16);color:var(--orange)">✨</div>
+      <h3>每日洞察</h3>
+      <p>掃描整個任務庫, 主動提醒逾期、今天/明天過載、時間衝突、重要卻沒排期。從「記錄」升級到「理解」。</p>
+    </div>
+    <div class="card">
+      <div class="ic" style="background:rgba(52,199,89,.16);color:var(--green)">🔒</div>
+      <h3>0 上傳 · 可證明</h3>
+      <p>任務存在本地 SQLite, 無 analytics、無 crash reporter、無第三方追蹤。App 內建隱私稽核面板, 落點一目了然。</p>
+    </div>
+    <div class="card">
+      <div class="ic" style="background:rgba(51,199,217,.16);color:var(--teal)">🔎</div>
+      <h3>全文搜尋</h3>
+      <p>FTS5 驅動的即時搜尋, 跨標題、備註、標籤。輸入即出結果, unicode 分詞對中文友善。</p>
+    </div>
+    <div class="card">
+      <div class="ic" style="background:rgba(175,82,222,.16);color:var(--magenta)">🗂️</div>
+      <h3>專案分類</h3>
+      <p>Things 式 Areas。側欄瀏覽專案、看任務數、新增刪除, 按工作 / 個人 / 學習歸類。</p>
+    </div>
+    <div class="card">
+      <div class="ic" style="background:rgba(90,200,250,.16);color:var(--blue)">📱</div>
+      <h3>iPhone + Mac</h3>
+      <p>一套程式碼雙端, SwiftUI 原生體驗。自適應佈局, 手機電腦都順手。</p>
+    </div>
+  </div>
+</section>
+
+<section id="engine-zh-Hant">
+  <div class="center reveal section-head">
+    <div class="eyebrow" style="justify-content:center">三層引擎</div>
+    <h2>永遠<span class="accent">點亮</span>, 永不離線</h2>
+    <p class="lede" style="margin:0 auto">按設備能力自動降級, 但規則兜底保證「一句話變任務」在任何機器上都成立。</p>
+  </div>
+  <div class="tiers reveal">
+    <div class="tier">
+      <div class="ring" style="background:rgba(107,92,242,.16);color:var(--violet)">🍎</div>
+      <div><h4>Apple Foundation Models <span class="pill-s" style="background:rgba(52,199,89,.16);color:var(--green)">首選</span></h4><p>macOS 26 / iOS 26 系統內建, 0 下載, 行程內推理。</p></div>
+      <div class="tn">TIER 01</div>
+    </div>
+    <div class="fallback-row">▼ 不可用則降級 <span>↓</span></div>
+    <div class="tier">
+      <div class="ring" style="background:rgba(51,199,217,.16);color:var(--teal)">🦙</div>
+      <div><h4>本地 GGUF 模型</h4><p>其他能跑的設備: 下載你選的 GGUF, 行程內 Llama.cpp 推理。</p></div>
+      <div class="tn">TIER 02</div>
+    </div>
+    <div class="fallback-row">▼ 不可用則降級 <span>↓</span></div>
+    <div class="tier">
+      <div class="ring" style="background:rgba(52,199,89,.16);color:var(--green)">📜</div>
+      <div><h4>規則解析 <span class="pill-s" style="background:rgba(255,149,0,.16);color:var(--orange)">永遠兜底</span></h4><p>零依賴正則引擎, 讀懂中文日期、時段、優先級、標籤。無需任何模型。</p></div>
+      <div class="tn">TIER 03</div>
+    </div>
+  </div>
+</section>
+
+<section id="privacy-zh-Hant">
+  <div class="privacy reveal">
+    <div class="lock">🔒</div>
+    <div class="eyebrow" style="color:var(--green)"><span style="background:var(--green)"></span>隱私, 是承諾也是工程</div>
+    <h2>你的任務, <span class="accent">只在你口袋裡</span></h2>
+    <p class="plede">KinetTask <b>沒有伺服器</b>。你的待辦內容從不離開設備 —— 不是寫在隱私政策裡的漂亮話, 是用<b>沙盒權限 + 僅設備端引擎 + 零第三方 SDK</b>三重保證的。你可以親眼看見資料落點, 甚至抓包驗證。</p>
+    <div class="priv-grid">
+      <div class="priv">
+        <div class="ic">🚫</div>
+        <h4>無分析 SDK</h4>
+        <p>不接任何 analytics、不埋點、不上報使用數據。</p>
+      </div>
+      <div class="priv">
+        <div class="ic">📦</div>
+        <h4>本地 SQLite</h4>
+        <p>所有任務、搜尋索引、專案都在你硬碟的 Application Support 裡。</p>
+      </div>
+      <div class="priv">
+        <div class="ic">🤖</div>
+        <h4>僅設備端引擎</h4>
+        <p>App Store 版只提供 Apple FM / 本地 GGUF, 沒有遠端 LLM。</p>
+      </div>
+    </div>
+    <div class="audit">🔍 應用內「隱私稽核」面板: 任務數、資料庫大小、模型大小, 一目了然</div>
+  </div>
+</section>
+
+<section id="compare-zh-Hant">
+  <div class="center reveal section-head">
+    <div class="eyebrow" style="justify-content:center">為什麼是 KinetTask</div>
+    <h2>又聰明,<span class="accent"> 又私密</span></h2>
+    <p class="lede" style="margin:0 auto">其他 app 各佔一格 —— Reminders 聰明但要上雲, Things 私密但不會 AI, Todoist 強大但靠你的數據養模型。KinetTask 佔那個空白的交集。</p>
+  </div>
+  <div class="cmp reveal">
+    <div class="cmp-card">
+      <div class="nm">🍎 Apple Reminders</div>
+      <div class="tag">免費 · 原生</div>
+      <div class="line">✓ 設備端 AI</div>
+      <div class="line"><b>✕ 預設 iCloud 上雲</b></div>
+      <div class="line"><b>✕ 模型封死, 不能換</b></div>
+    </div>
+    <div class="cmp-card">
+      <div class="nm">📋 Todoist / TickTick</div>
+      <div class="tag">訂閱 · 雲端</div>
+      <div class="line">✓ AI / 解析極強</div>
+      <div class="line"><b>✕ 任務文字發去雲端</b></div>
+      <div class="line"><b>✕ 護城河需要你的數據</b></div>
+    </div>
+    <div class="cmp-card" style="border-color:var(--violet);background:linear-gradient(180deg,rgba(107,92,242,.1),var(--surface))">
+      <div class="nm" style="background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent">✓ KinetTask</div>
+      <div class="tag">免費 · 本地優先</div>
+      <div class="line">✓ 設備端 AI 推理</div>
+      <div class="line">✓ 0 上傳, 可稽核</div>
+      <div class="line">✓ 自選模型</div>
+    </div>
+  </div>
+  <div class="cmp-vs reveal"><span>比 Reminders 聰明</span><span class="arrow">·</span><span>比 Todoist 私密</span><span class="arrow">·</span><span>比 Things 懂你</span></div>
+</section>
+
+<section id="design-zh-Hant">
+  <div class="center reveal section-head">
+    <div class="eyebrow" style="justify-content:center">熟悉的設計</div>
+    <h2>Things 式<span class="accent"> 六段狀態</span></h2>
+    <p class="lede" style="margin:0 auto">不做花裡胡哨。點一下完成, 劃一下刪除, 點一下編輯。該克制的地方克制。</p>
+  </div>
+  <div class="states reveal">
+    <span class="state"><span class="si">📥</span> 收件匣</span>
+    <span class="state"><span class="si">☀️</span> 今天</span>
+    <span class="state"><span class="si">📅</span> 即將</span>
+    <span class="state"><span class="si">♾️</span> 任何時候</span>
+    <span class="state"><span class="si">🌙</span> 也許將來</span>
+    <span class="state"><span class="si">✅</span> 已完成</span>
+  </div>
+</section>
+
+<section id="faq-zh-Hant">
+  <div class="center reveal section-head">
+    <div class="eyebrow" style="justify-content:center">常見問題</div>
+    <h2>你大概<span class="accent">想問的</span></h2>
+  </div>
+  <div class="faq reveal">
+    <details class="faq-item" open>
+      <summary>數據真的不上傳嗎?</summary>
+      <div class="ans">是的。任務存在本地 SQLite, 無 analytics、無 crash reporter、無第三方追蹤。App Store 版只提供設備端 AI 引擎, 沒有任何遠端 LLM。你可以用應用內的「隱私稽核」面板查看資料落點, 甚至<b>抓包驗證</b>。</div>
+    </details>
+    <details class="faq-item">
+      <summary>跟免費的 Apple Reminders 比, 憑什麼?</summary>
+      <div class="ans">Reminders 在 iOS 26 也設備端化、也能自然語言建任務了 —— 但它<b>預設 iCloud 上雲</b>, 且模型<b>封死</b>。KinetTask 永不連網, 還能讓你<b>自選模型</b>, 並對整個任務庫做推理(每日洞察、衝突偵測、任務拆解)。</div>
+    </details>
+    <details class="faq-item">
+      <summary>沒有網路 / 沒 Apple FM 的設備能用嗎?</summary>
+      <div class="ans">能。KinetTask 三層引擎會自動降級: Apple FM 不可用就跑你下載的本地 GGUF 模型; 連模型都沒有, <b>內建規則解析器</b>照樣能讀懂「明天下午 3 點開會」。完全離線也點得亮。</div>
+    </details>
+    <details class="faq-item">
+      <summary>是免費的嗎?</summary>
+      <div class="ans">免費版即可日常使用(最多 50 條活躍任務), <b>無訂閱</b>。Pro 是<b>一次性買斷</b>, 解鎖無限任務、AI 任務拆解、推理搜尋與主題定製 —— 買一次, 名下所有設備永久可用。</div>
+    </details>
+    <details class="faq-item">
+      <summary>支援哪些設備?</summary>
+      <div class="ans">macOS 14+ 與 iOS 17+。Apple Foundation Models 需 macOS 26 / iOS 26; 舊系統降級本地模型或規則解析。不支援 Linux / Windows —— Apple FM、WidgetKit 都是 Apple 獨佔, 跨平台是另一個產品。</div>
+    </details>
+    <details class="faq-item">
+      <summary>任務會丟嗎?</summary>
+      <div class="ans">不會。本地 SQLite + WAL 日誌, 即使 app 當機任務也在硬碟上。重啟即從磁碟讀回全部任務。</div>
+    </details>
+  </div>
+</section>
+
+<section>
+  <div class="final reveal">
+    <div class="ic">✓<img src="app-icon.png" alt=""></div>
+    <h2>準備好, <span class="accent">讓任務庫懂你了</span></h2>
+    <p class="sub">聰明、私密、免費。即將上架 App Store。</p>
+    <div class="final-cta">
+      <a class="btn btn-apple btn-lg" href="https://apps.apple.com/app/id6780944289">
+        <svg width="16" height="18" viewBox="0 0 384 512" fill="currentColor"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
+        App Store <span class="soon">即將上架</span>
+      </a>
+    </div>
+  </div>
+</section>
+</section>
+
+<!-- en -->
+<section class="lang-block" data-lang="en">
+<section class="hero">
+  <div class="hero-badge"><span class="dot"></span> Local AI Task Manager · Fully Offline · Coming to the App Store</div>
+  <h1>A task library that<br><span class="grad">actually gets you</span></h1>
+  <p class="sub">KinetTask is a <b>local-first</b> AI task manager. Turn a sentence into a task with <b>Apple Foundation Models on-device inference</b> — 0 upload, 0 tracking. Smarter than Reminders, more private than Todoist, more understanding than Things.</p>
+  <div class="hero-cta">
+    <a class="btn btn-apple btn-lg" href="https://apps.apple.com/app/id6780944289">
+      <svg width="16" height="18" viewBox="0 0 384 512" fill="currentColor"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
+      App Store <span class="soon">Coming Soon</span>
+    </a>
+    <a class="btn btn-ghost btn-lg" href="#magic-en">See the natural-language magic ↓</a>
+  </div>
+  <div class="hero-trust">
+    <span class="t"><span class="ic">🔒</span> 0 upload</span>
+    <span class="t"><span class="ic">🤖</span> On-device AI</span>
+    <span class="t"><span class="ic">💎</span> Free · Unlimited tasks</span>
+    <span class="t"><span class="ic">📱</span> iPhone + Mac</span>
+  </div>
+
+  <div class="mockup-wrap reveal">
+    <div class="mockup">
+      <div class="titlebar">
+        <span class="tl r"></span><span class="tl y"></span><span class="tl g"></span>
+        <span class="tt">KinetTask</span>
+      </div>
+      <div class="win">
+        <div class="side">
+          <div class="side-h">Tasks</div>
+          <div class="side-i"><span class="si">📥</span> Inbox</div>
+          <div class="side-i act"><span class="si">☀️</span> Today <span class="ct">5</span></div>
+          <div class="side-i"><span class="si">📅</span> Upcoming <span class="ct">3</span></div>
+          <div class="side-i"><span class="si">♾️</span> Anytime</div>
+          <div class="side-i"><span class="si">🌙</span> Someday</div>
+          <div class="side-i"><span class="si">✅</span> Done</div>
+          <div class="side-h">Projects</div>
+          <div class="side-i"><span class="si" style="color:#6B5CF2">💼</span> Work <span class="ct">4</span></div>
+          <div class="side-i"><span class="si" style="color:#33C7D9">👤</span> Personal <span class="ct">2</span></div>
+          <div class="side-i"><span class="si" style="color:#8C4DD9">📚</span> Study <span class="ct">1</span></div>
+        </div>
+        <div class="detail">
+          <div class="detail-top">
+            <h4>Today</h4>
+            <span class="ic-search">🔍</span>
+          </div>
+          <div class="insight">
+            <span class="ii">🔥</span>
+            <span><b>5 tasks today</b> · That's a lot — consider moving the less urgent ones</span>
+          </div>
+          <div class="tasks">
+            <div class="trow">
+              <div class="cb"></div>
+              <div class="info">
+                <div class="tt2">Finish product review notes <span class="pri urgent">Urgent</span></div>
+                <div class="meta"><span class="late">⏰ Overdue · Today 09:00</span> <span class="tagc">#work</span></div>
+              </div>
+              <span class="chev">›</span>
+            </div>
+            <div class="trow">
+              <div class="cb"></div>
+              <div class="info">
+                <div class="tt2">Feedback on design drafts <span class="pri high">High</span></div>
+                <div class="meta"><span>📅 Today 14:30</span> <span class="tagc">#design</span></div>
+              </div>
+              <span class="chev">›</span>
+            </div>
+            <div class="trow">
+              <div class="cb"></div>
+              <div class="info">
+                <div class="tt2">Prep weekly meeting deck</div>
+                <div class="meta"><span>📅 Today 16:00</span> <span class="tagc">#work</span></div>
+              </div>
+              <span class="chev">›</span>
+            </div>
+            <div class="trow">
+              <div class="cb"></div>
+              <div class="info">
+                <div class="tt2">Prepare quarterly report <span class="pri high">High</span></div>
+                <div class="meta"><span>📅 Fri 10:00</span></div>
+              </div>
+              <span class="chev">⌄</span>
+            </div>
+            <div class="sub-rows">
+              <div class="trow sub">
+                <div class="cb"></div>
+                <div class="tt2">Pull this week's key metrics</div>
+              </div>
+              <div class="trow sub">
+                <div class="cb"></div>
+                <div class="tt2">Draw 3 key flow diagrams</div>
+              </div>
+            </div>
+            <div class="trow done">
+              <div class="cb">✓</div>
+              <div class="info"><div class="tt2">Reply to client email</div></div>
+            </div>
+          </div>
+          <div class="inputbar">
+            <div class="ib-inner"><span class="spark">✨</span> Weekly meeting tomorrow 3pm<span class="cursor"></span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="magic-en">
+  <div class="center reveal" style="margin-bottom:52px">
+    <div class="eyebrow" style="justify-content:center">The killer feature</div>
+    <h2>Say it once, <span class="accent">it figures out the rest</span></h2>
+    <p class="lede" style="margin:0 auto">No forms, no date pickers. KinetTask reads natural language on your device and extracts the title, deadline, priority, and tags automatically.</p>
+  </div>
+  <div class="nl-demo reveal">
+    <div class="nl-input"><span style="color:var(--magenta)">✨</span><span class="typed" id="typed-en"></span><span class="cur"></span></div>
+    <div class="nl-arrow">↓</div>
+    <div class="nl-result">
+      <div class="nl-row"><span class="k">Title</span><span class="v title">Weekly meeting</span></div>
+      <div class="nl-row"><span class="k">Due</span><span class="v">Tomorrow 15:00 → filed under "Upcoming"</span></div>
+      <div class="nl-row"><span class="k">Priority</span><span class="v"><span class="chip" style="background:rgba(255,149,0,.16);color:var(--orange)">High</span></span></div>
+      <div class="nl-row"><span class="k">Tags</span><span class="v"><span class="chip" style="background:rgba(51,199,217,.16);color:var(--teal)">#work</span> <span class="chip" style="background:rgba(51,199,217,.16);color:var(--teal)">#meeting</span></span></div>
+    </div>
+  </div>
+</section>
+
+<section id="features-en">
+  <div class="center reveal section-head">
+    <div class="eyebrow" style="justify-content:center">Features</div>
+    <h2>Smart, private, <span class="accent">clean</span></h2>
+    <p class="lede" style="margin:0 auto">Everything you need — and none of what you don't (cloud, tracking, subscription).</p>
+  </div>
+  <div class="grid g3 reveal">
+    <div class="card">
+      <div class="ic" style="background:rgba(107,92,242,.16);color:var(--violet)">🧠</div>
+      <h3>On-device AI inference</h3>
+      <p>Apple Foundation Models on macOS 26 / iOS 26 — zero download, zero setup. Other devices run a local model you choose. No model at all? The built-in rule parser still works. Nothing ever leaves the device.</p>
+    </div>
+    <div class="card">
+      <div class="ic" style="background:rgba(255,149,0,.16);color:var(--orange)">✨</div>
+      <h3>Daily insights</h3>
+      <p>Scans your whole task library and proactively flags overdue items, overloaded days, time conflicts, and important-but-unscheduled tasks. From "recording" to "understanding".</p>
+    </div>
+    <div class="card">
+      <div class="ic" style="background:rgba(52,199,89,.16);color:var(--green)">🔒</div>
+      <h3>0 upload · provable</h3>
+      <p>Tasks live in a local SQLite database — no analytics, no crash reporter, no third-party tracking. A built-in Privacy Audit panel shows exactly where your data lives.</p>
+    </div>
+    <div class="card">
+      <div class="ic" style="background:rgba(51,199,217,.16);color:var(--teal)">🔎</div>
+      <h3>Full-text search</h3>
+      <p>FTS5-powered instant search across titles, notes, and tags. Results as you type, with unicode tokenization that handles CJK text properly.</p>
+    </div>
+    <div class="card">
+      <div class="ic" style="background:rgba(175,82,222,.16);color:var(--magenta)">🗂️</div>
+      <h3>Projects</h3>
+      <p>Things-style Areas. Browse projects in the sidebar, see task counts, create and delete, organized by work / personal / study.</p>
+    </div>
+    <div class="card">
+      <div class="ic" style="background:rgba(90,200,250,.16);color:var(--blue)">📱</div>
+      <h3>iPhone + Mac</h3>
+      <p>One codebase, two platforms, native SwiftUI experience. Adaptive layouts that feel at home on both phone and desktop.</p>
+    </div>
+  </div>
+</section>
+
+<section id="engine-en">
+  <div class="center reveal section-head">
+    <div class="eyebrow" style="justify-content:center">Three-tier engine</div>
+    <h2>Always <span class="accent">on</span>, never offline</h2>
+    <p class="lede" style="margin:0 auto">Degrades gracefully by device capability, with a rule-based fallback that guarantees "one sentence becomes a task" on any machine.</p>
+  </div>
+  <div class="tiers reveal">
+    <div class="tier">
+      <div class="ring" style="background:rgba(107,92,242,.16);color:var(--violet)">🍎</div>
+      <div><h4>Apple Foundation Models <span class="pill-s" style="background:rgba(52,199,89,.16);color:var(--green)">Preferred</span></h4><p>Built into macOS 26 / iOS 26. Zero download, in-process inference.</p></div>
+      <div class="tn">TIER 01</div>
+    </div>
+    <div class="fallback-row">▼ Falls back if unavailable <span>↓</span></div>
+    <div class="tier">
+      <div class="ring" style="background:rgba(51,199,217,.16);color:var(--teal)">🦙</div>
+      <div><h4>Local GGUF models</h4><p>For other capable devices: download the GGUF you choose, in-process Llama.cpp inference.</p></div>
+      <div class="tn">TIER 02</div>
+    </div>
+    <div class="fallback-row">▼ Falls back if unavailable <span>↓</span></div>
+    <div class="tier">
+      <div class="ring" style="background:rgba(52,199,89,.16);color:var(--green)">📜</div>
+      <div><h4>Rule-based parsing <span class="pill-s" style="background:rgba(255,149,0,.16);color:var(--orange)">Forever fallback</span></h4><p>A zero-dependency regex engine that understands dates, times, priorities, and tags. No model required.</p></div>
+      <div class="tn">TIER 03</div>
+    </div>
+  </div>
+</section>
+
+<section id="privacy-en">
+  <div class="privacy reveal">
+    <div class="lock">🔒</div>
+    <div class="eyebrow" style="color:var(--green)"><span style="background:var(--green)"></span>Privacy is a promise — and engineering</div>
+    <h2>Your tasks, <span class="accent">only in your pocket</span></h2>
+    <p class="plede">KinetTask <b>has no servers</b>. Your to-dos never leave the device — not a pretty line in a privacy policy, but guaranteed by <b>sandboxed permissions + on-device-only engines + zero third-party SDKs</b>. You can see exactly where your data lives, and verify with a packet sniffer.</p>
+    <div class="priv-grid">
+      <div class="priv">
+        <div class="ic">🚫</div>
+        <h4>No analytics SDK</h4>
+        <p>No analytics, no telemetry, no usage reporting.</p>
+      </div>
+      <div class="priv">
+        <div class="ic">📦</div>
+        <h4>Local SQLite</h4>
+        <p>All tasks, search indexes, and projects live in Application Support on your disk.</p>
+      </div>
+      <div class="priv">
+        <div class="ic">🤖</div>
+        <h4>On-device engines only</h4>
+        <p>The App Store build offers Apple FM / local GGUF only — no remote LLM.</p>
+      </div>
+    </div>
+    <div class="audit">🔍 In-app "Privacy Audit" panel: task count, database size, model size — all at a glance</div>
+  </div>
+</section>
+
+<section id="compare-en">
+  <div class="center reveal section-head">
+    <div class="eyebrow" style="justify-content:center">Why KinetTask</div>
+    <h2>Smart <span class="accent">and</span> private</h2>
+    <p class="lede" style="margin:0 auto">Every other app occupies one square — Reminders is smart but cloud-first, Things is private but no AI, Todoist is powerful but its moat is trained on your data. KinetTask occupies the empty intersection.</p>
+  </div>
+  <div class="cmp reveal">
+    <div class="cmp-card">
+      <div class="nm">🍎 Apple Reminders</div>
+      <div class="tag">Free · Native</div>
+      <div class="line">✓ On-device AI</div>
+      <div class="line"><b>✕ iCloud sync by default</b></div>
+      <div class="line"><b>✕ Locked-in model, no choice</b></div>
+    </div>
+    <div class="cmp-card">
+      <div class="nm">📋 Todoist / TickTick</div>
+      <div class="tag">Subscription · Cloud</div>
+      <div class="line">✓ Powerful AI / parsing</div>
+      <div class="line"><b>✕ Task text goes to the cloud</b></div>
+      <div class="line"><b>✕ Moat needs your data</b></div>
+    </div>
+    <div class="cmp-card" style="border-color:var(--violet);background:linear-gradient(180deg,rgba(107,92,242,.1),var(--surface))">
+      <div class="nm" style="background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent">✓ KinetTask</div>
+      <div class="tag">Free · Local-first</div>
+      <div class="line">✓ On-device AI inference</div>
+      <div class="line">✓ 0 upload, auditable</div>
+      <div class="line">✓ Bring your own model</div>
+    </div>
+  </div>
+  <div class="cmp-vs reveal"><span>Smarter than Reminders</span><span class="arrow">·</span><span>More private than Todoist</span><span class="arrow">·</span><span>More understanding than Things</span></div>
+</section>
+
+<section id="design-en">
+  <div class="center reveal section-head">
+    <div class="eyebrow" style="justify-content:center">A familiar design</div>
+    <h2>Things-style <span class="accent">six states</span></h2>
+    <p class="lede" style="margin:0 auto">No gimmicks. Tap to complete, swipe to delete, click to edit. Restraint where restraint is due.</p>
+  </div>
+  <div class="states reveal">
+    <span class="state"><span class="si">📥</span> Inbox</span>
+    <span class="state"><span class="si">☀️</span> Today</span>
+    <span class="state"><span class="si">📅</span> Upcoming</span>
+    <span class="state"><span class="si">♾️</span> Anytime</span>
+    <span class="state"><span class="si">🌙</span> Someday</span>
+    <span class="state"><span class="si">✅</span> Done</span>
+  </div>
+</section>
+
+<section id="faq-en">
+  <div class="center reveal section-head">
+    <div class="eyebrow" style="justify-content:center">FAQ</div>
+    <h2>What you're <span class="accent">probably wondering</span></h2>
+  </div>
+  <div class="faq reveal">
+    <details class="faq-item" open>
+      <summary>Is my data really never uploaded?</summary>
+      <div class="ans">Yes — never. Tasks live in a local SQLite database with no analytics, no crash reporter, no third-party tracking. The App Store build ships on-device AI engines only, with no remote LLM whatsoever. The in-app "Privacy Audit" panel shows where your data lives, and you can <b>verify with a packet sniffer</b>.</div>
+    </details>
+    <details class="faq-item">
+      <summary>Why not just use free Apple Reminders?</summary>
+      <div class="ans">Reminders on iOS 26 is also on-device and parses natural language now — but it <b>syncs to iCloud by default</b> and the model is <b>locked in</b>. KinetTask never phones home, lets you <b>choose your own model</b>, and reasons over your whole task library (daily insights, conflict detection, task breakdown).</div>
+    </details>
+    <details class="faq-item">
+      <summary>Does it work with no network / no Apple FM?</summary>
+      <div class="ans">Yes. The three-tier engine degrades automatically: if Apple FM is unavailable, it runs a local GGUF model you downloaded; with no model at all, the <b>built-in rule parser</b> still understands "weekly meeting tomorrow 3pm". Fully offline works fine.</div>
+    </details>
+    <details class="faq-item">
+      <summary>Is it free?</summary>
+      <div class="ans">The free version is fully usable for daily life (up to 50 active tasks) with <b>no subscription</b>. Pro is a <b>one-time purchase</b> that unlocks unlimited tasks, AI task breakdown, reasoning search, and themes — pay once, yours forever on every device you own.</div>
+    </details>
+    <details class="faq-item">
+      <summary>Which devices are supported?</summary>
+      <div class="ans">macOS 14+ and iOS 17+. Apple Foundation Models requires macOS 26 / iOS 26; older systems fall back to a local model or rule parsing. No Linux / Windows — Apple FM and WidgetKit are Apple-exclusive; cross-platform would be a different product.</div>
+    </details>
+    <details class="faq-item">
+      <summary>Could I lose my tasks?</summary>
+      <div class="ans">No. Local SQLite + WAL journaling means your tasks are on disk even if the app crashes. Everything is read back from disk on relaunch.</div>
+    </details>
+  </div>
+</section>
+
+<section>
+  <div class="final reveal">
+    <div class="ic">✓<img src="app-icon.png" alt=""></div>
+    <h2>Ready for a task library <span class="accent">that gets you?</span></h2>
+    <p class="sub">Smart, private, free. Coming to the App Store.</p>
+    <div class="final-cta">
+      <a class="btn btn-apple btn-lg" href="https://apps.apple.com/app/id6780944289">
+        <svg width="16" height="18" viewBox="0 0 384 512" fill="currentColor"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
+        App Store <span class="soon">Coming Soon</span>
+      </a>
+    </div>
+  </div>
+</section>
+</section>
+
+<!-- ja -->
+<section class="lang-block" data-lang="ja" hidden>
+<section class="hero">
+  <div class="hero-badge"><span class="dot"></span> Local AI Task Manager · 完全オフライン · 近日公開</div>
+  <h1>あなたのタスクが<br><span class="grad">あなたを理解する</span></h1>
+  <p class="sub">KinetTask は<b>ローカルファースト</b>の AI タスク管理アプリ。一言がタスクに変わり、<b>Apple Foundation Models のオンデバイス推論</b>で動きます。アップロード 0、トラッキング 0。Reminders より賢く、Todoist よりプライベート、Things よりあなたを理解します。</p>
+  <div class="hero-cta">
+    <a class="btn btn-apple btn-lg" href="https://apps.apple.com/app/id6780944289">
+      <svg width="16" height="18" viewBox="0 0 384 512" fill="currentColor"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
+      App Store <span class="soon">近日公開</span>
+    </a>
+    <a class="btn btn-ghost btn-lg" href="#magic-ja">自然言語マジックを見る ↓</a>
+  </div>
+  <div class="hero-trust">
+    <span class="t"><span class="ic">🔒</span> アップロード 0</span>
+    <span class="t"><span class="ic">🤖</span> オンデバイス AI</span>
+    <span class="t"><span class="ic">💎</span> 無料 · タスク無制限</span>
+    <span class="t"><span class="ic">📱</span> iPhone + Mac</span>
+  </div>
+
+  <div class="mockup-wrap reveal">
+    <div class="mockup">
+      <div class="titlebar">
+        <span class="tl r"></span><span class="tl y"></span><span class="tl g"></span>
+        <span class="tt">KinetTask</span>
+      </div>
+      <div class="win">
+        <div class="side">
+          <div class="side-h">タスク</div>
+          <div class="side-i"><span class="si">📥</span> 受信箱</div>
+          <div class="side-i act"><span class="si">☀️</span> 今日 <span class="ct">5</span></div>
+          <div class="side-i"><span class="si">📅</span> 予定 <span class="ct">3</span></div>
+          <div class="side-i"><span class="si">♾️</span> いつでも</div>
+          <div class="side-i"><span class="si">🌙</span> いつか</div>
+          <div class="side-i"><span class="si">✅</span> 完了</div>
+          <div class="side-h">プロジェクト</div>
+          <div class="side-i"><span class="si" style="color:#6B5CF2">💼</span> 仕事 <span class="ct">4</span></div>
+          <div class="side-i"><span class="si" style="color:#33C7D9">👤</span> プライベート <span class="ct">2</span></div>
+          <div class="side-i"><span class="si" style="color:#8C4DD9">📚</span> 勉強 <span class="ct">1</span></div>
+        </div>
+        <div class="detail">
+          <div class="detail-top">
+            <h4>今日</h4>
+            <span class="ic-search">🔍</span>
+          </div>
+          <div class="insight">
+            <span class="ii">🔥</span>
+            <span><b>今日は 5 件</b> · 少し多いかも。急がないものを移動してみては?</span>
+          </div>
+          <div class="tasks">
+            <div class="trow">
+              <div class="cb"></div>
+              <div class="info">
+                <div class="tt2">製品レビュー議事録を仕上げる <span class="pri urgent">緊急</span></div>
+                <div class="meta"><span class="late">⏰ 期限切れ · 今日 09:00</span> <span class="tagc">#仕事</span></div>
+              </div>
+              <span class="chev">›</span>
+            </div>
+            <div class="trow">
+              <div class="cb"></div>
+              <div class="info">
+                <div class="tt2">デザイン案にフィードバック <span class="pri high">高</span></div>
+                <div class="meta"><span>📅 今日 14:30</span> <span class="tagc">#デザイン</span></div>
+              </div>
+              <span class="chev">›</span>
+            </div>
+            <div class="trow">
+              <div class="cb"></div>
+              <div class="info">
+                <div class="tt2">週次会議の資料を準備</div>
+                <div class="meta"><span>📅 今日 16:00</span> <span class="tagc">#仕事</span></div>
+              </div>
+              <span class="chev">›</span>
+            </div>
+            <div class="trow">
+              <div class="cb"></div>
+              <div class="info">
+                <div class="tt2">四半期報告を準備 <span class="pri high">高</span></div>
+                <div class="meta"><span>📅 金 10:00</span></div>
+              </div>
+              <span class="chev">⌄</span>
+            </div>
+            <div class="sub-rows">
+              <div class="trow sub">
+                <div class="cb"></div>
+                <div class="tt2">今週の重要データを収集</div>
+              </div>
+              <div class="trow sub">
+                <div class="cb"></div>
+                <div class="tt2">主要フロー図を 3 枚作成</div>
+              </div>
+            </div>
+            <div class="trow done">
+              <div class="cb">✓</div>
+              <div class="info"><div class="tt2">クライアントにメール返信</div></div>
+            </div>
+          </div>
+          <div class="inputbar">
+            <div class="ib-inner"><span class="spark">✨</span> 明日の午後 3 時に週次会議<span class="cursor"></span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="magic-ja">
+  <div class="center reveal" style="margin-bottom:52px">
+    <div class="eyebrow" style="justify-content:center">目玉機能</div>
+    <h2>一言言えば、<span class="accent">あとはおまかせ</span></h2>
+    <p class="lede" style="margin:0 auto">フォーム入力も日付選択も不要。KinetTask はデバイス上で自然言語を読み解き、タイトル・期限・優先度・タグを自動で切り出します。</p>
+  </div>
+  <div class="nl-demo reveal">
+    <div class="nl-input"><span style="color:var(--magenta)">✨</span><span class="typed" id="typed-ja"></span><span class="cur"></span></div>
+    <div class="nl-arrow">↓</div>
+    <div class="nl-result">
+      <div class="nl-row"><span class="k">タイトル</span><span class="v title">週次会議</span></div>
+      <div class="nl-row"><span class="k">期限</span><span class="v">明日 15:00 → 「予定」に自動分類</span></div>
+      <div class="nl-row"><span class="k">優先度</span><span class="v"><span class="chip" style="background:rgba(255,149,0,.16);color:var(--orange)">高</span></span></div>
+      <div class="nl-row"><span class="k">タグ</span><span class="v"><span class="chip" style="background:rgba(51,199,217,.16);color:var(--teal)">#仕事</span> <span class="chip" style="background:rgba(51,199,217,.16);color:var(--teal)">#会議</span></span></div>
+    </div>
+  </div>
+</section>
+
+<section id="features-ja">
+  <div class="center reveal section-head">
+    <div class="eyebrow" style="justify-content:center">機能</div>
+    <h2>賢く、プライベート、<span class="accent">すっきり</span></h2>
+    <p class="lede" style="margin:0 auto">必要なものは全部、不要なもの(クラウド・トラッキング・サブスク)は一切なし。</p>
+  </div>
+  <div class="grid g3 reveal">
+    <div class="card">
+      <div class="ic" style="background:rgba(107,92,242,.16);color:var(--violet)">🧠</div>
+      <h3>オンデバイス AI 推論</h3>
+      <p>macOS 26 / iOS 26 では Apple Foundation Models を零ダウンロードで利用。その他のデバイスは選んだローカルモデルで実行。モデルがなくても内蔵ルール解析で動作します。すべてデバイスから出ません。</p>
+    </div>
+    <div class="card">
+      <div class="ic" style="background:rgba(255,149,0,.16);color:var(--orange)">✨</div>
+      <h3>デイリーインサイト</h3>
+      <p>タスクライブラリ全体を走査し、期限切れ・今日/明日の過積載・時間の重複・重要なのに未計画なタスクを自主的に通知。「記録」から「理解」へ。</p>
+    </div>
+    <div class="card">
+      <div class="ic" style="background:rgba(52,199,89,.16);color:var(--green)">🔒</div>
+      <h3>アップロード 0 · 証明可能</h3>
+      <p>タスクはローカル SQLite に保存。analytics なし、crash レポーターなし、サードパーティトラッキングなし。アプリ内のプライバシー監査パネルで保存先をひと目で確認できます。</p>
+    </div>
+    <div class="card">
+      <div class="ic" style="background:rgba(51,199,217,.16);color:var(--teal)">🔎</div>
+      <h3>全文検索</h3>
+      <p>FTS5 駆動のリアルタイム検索。タイトル・メモ・タグを横断。入力するだけで結果が表示され、unicode 分割で日本語も快適。</p>
+    </div>
+    <div class="card">
+      <div class="ic" style="background:rgba(175,82,222,.16);color:var(--magenta)">🗂️</div>
+      <h3>プロジェクト分類</h3>
+      <p>Things 式の Areas。サイドバーでプロジェクトを閲覧・タスク数を確認・作成と削除。仕事 / プライベート / 勉強で整理。</p>
+    </div>
+    <div class="card">
+      <div class="ic" style="background:rgba(90,200,250,.16);color:var(--blue)">📱</div>
+      <h3>iPhone + Mac</h3>
+      <p>ひとつのコードベースで両プラットフォーム、SwiftUI ネイティブ体験。レスポンシブレイアウトでスマホも PC も快適。</p>
+    </div>
+  </div>
+</section>
+
+<section id="engine-ja">
+  <div class="center reveal section-head">
+    <div class="eyebrow" style="justify-content:center">3 層エンジン</div>
+    <h2>常に<span class="accent">稼働</span>、決してオフラインにしない</h2>
+    <p class="lede" style="margin:0 auto">デバイスの能力に応じて自動で切り替え、ルールベースのフォールバックが「一言がタスクになる」ことをどんな環境でも保証します。</p>
+  </div>
+  <div class="tiers reveal">
+    <div class="tier">
+      <div class="ring" style="background:rgba(107,92,242,.16);color:var(--violet)">🍎</div>
+      <div><h4>Apple Foundation Models <span class="pill-s" style="background:rgba(52,199,89,.16);color:var(--green)">第一候補</span></h4><p>macOS 26 / iOS 26 にシステム内蔵。ダウンロード 0、プロセス内推論。</p></div>
+      <div class="tn">TIER 01</div>
+    </div>
+    <div class="fallback-row">▼ 利用不可ならフォールバック <span>↓</span></div>
+    <div class="tier">
+      <div class="ring" style="background:rgba(51,199,217,.16);color:var(--teal)">🦙</div>
+      <div><h4>ローカル GGUF モデル</h4><p>その他の対応デバイス: 選んだ GGUF をダウンロードし、プロセス内 Llama.cpp で推論。</p></div>
+      <div class="tn">TIER 02</div>
+    </div>
+    <div class="fallback-row">▼ 利用不可ならフォールバック <span>↓</span></div>
+    <div class="tier">
+      <div class="ring" style="background:rgba(52,199,89,.16);color:var(--green)">📜</div>
+      <div><h4>ルール解析 <span class="pill-s" style="background:rgba(255,149,0,.16);color:var(--orange)">永遠のフォールバック</span></h4><p>依存ゼロの正規表現エンジンが日付・時間帯・優先度・タグを読み解きます。モデル不要。</p></div>
+      <div class="tn">TIER 03</div>
+    </div>
+  </div>
+</section>
+
+<section id="privacy-ja">
+  <div class="privacy reveal">
+    <div class="lock">🔒</div>
+    <div class="eyebrow" style="color:var(--green)"><span style="background:var(--green)"></span>プライバシーは誓約であり、そして設計</div>
+    <h2>あなたのタスクは、<span class="accent">ポケットの中だけ</span></h2>
+    <p class="plede">KinetTask には<b>サーバーがありません</b>。TODO の内容は決してデバイスを離れません —— プライバシーポリシーの美文ではなく、<b>サンドボックス権限 + オンデバイス専用エンジン + サードパーティ SDK ゼロ</b>の三重保証です。データの保存先を目で確認でき、パケットキャプチャで検証することもできます。</p>
+    <div class="priv-grid">
+      <div class="priv">
+        <div class="ic">🚫</div>
+        <h4>解析 SDK なし</h4>
+        <p>analytics もテレメトリも使用状況の報告も一切なし。</p>
+      </div>
+      <div class="priv">
+        <div class="ic">📦</div>
+        <h4>ローカル SQLite</h4>
+        <p>タスク・検索インデックス・プロジェクトはすべてあなたのディスクの Application Support 内。</p>
+      </div>
+      <div class="priv">
+        <div class="ic">🤖</div>
+        <h4>オンデバイスエンジンのみ</h4>
+        <p>App Store 版は Apple FM / ローカル GGUF のみ。リモート LLM はありません。</p>
+      </div>
+    </div>
+    <div class="audit">🔍 アプリ内「プライバシー監査」パネル: タスク数・DB サイズ・モデルサイズをひと目で確認</div>
+  </div>
+</section>
+
+<section id="compare-ja">
+  <div class="center reveal section-head">
+    <div class="eyebrow" style="justify-content:center">なぜ KinetTask なのか</div>
+    <h2>賢くて、<span class="accent">プライベート</span></h2>
+    <p class="lede" style="margin:0 auto">他のアプリはそれぞれ一マスを占めるだけ —— Reminders は賢いがクラウド前提、Things はプライベートでも AI なし、Todoist は強力でもあなたのデータでモデルを育てる。KinetTask はその空白の交差点を占めます。</p>
+  </div>
+  <div class="cmp reveal">
+    <div class="cmp-card">
+      <div class="nm">🍎 Apple Reminders</div>
+      <div class="tag">無料 · ネイティブ</div>
+      <div class="line">✓ オンデバイス AI</div>
+      <div class="line"><b>✕ デフォルトで iCloud 同期</b></div>
+      <div class="line"><b>✕ モデルは固定・選べない</b></div>
+    </div>
+    <div class="cmp-card">
+      <div class="nm">📋 Todoist / TickTick</div>
+      <div class="tag">サブスク · クラウド</div>
+      <div class="line">✓ AI / 解析は強力</div>
+      <div class="line"><b>✕ タスク本文がクラウドへ送信</b></div>
+      <div class="line"><b>✕ 壊 couldn't の堀にはあなたのデータが必要</b></div>
+    </div>
+    <div class="cmp-card" style="border-color:var(--violet);background:linear-gradient(180deg,rgba(107,92,242,.1),var(--surface))">
+      <div class="nm" style="background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent">✓ KinetTask</div>
+      <div class="tag">無料 · ローカルファースト</div>
+      <div class="line">✓ オンデバイス AI 推論</div>
+      <div class="line">✓ アップロード 0 · 監査可能</div>
+      <div class="line">✓ モデルを自由に選択</div>
+    </div>
+  </div>
+  <div class="cmp-vs reveal"><span>Reminders より賢い</span><span class="arrow">·</span><span>Todoist よりプライベート</span><span class="arrow">·</span><span>Things より理解する</span></div>
+</section>
+
+<section id="design-ja">
+  <div class="center reveal section-head">
+    <div class="eyebrow" style="justify-content:center">見慣れたデザイン</div>
+    <h2>Things 式 <span class="accent">6 つのステータス</span></h2>
+    <p class="lede" style="margin:0 auto">余計な仕掛けはなし。タップで完了、スワイプで削除、クリックで編集。抑制すべきところは抑制。</p>
+  </div>
+  <div class="states reveal">
+    <span class="state"><span class="si">📥</span> 受信箱</span>
+    <span class="state"><span class="si">☀️</span> 今日</span>
+    <span class="state"><span class="si">📅</span> 予定</span>
+    <span class="state"><span class="si">♾️</span> いつでも</span>
+    <span class="state"><span class="si">🌙</span> いつか</span>
+    <span class="state"><span class="si">✅</span> 完了</span>
+  </div>
+</section>
+
+<section id="faq-ja">
+  <div class="center reveal section-head">
+    <div class="eyebrow" style="justify-content:center">よくある質問</div>
+    <h2>きっと<span class="accent">知りたいはず</span></h2>
+  </div>
+  <div class="faq reveal">
+    <details class="faq-item" open>
+      <summary>データは本当にアップロードされない?</summary>
+      <div class="ans">はい。タスクはローカル SQLite に保存され、analytics も crash レポーターもサードパーティトラッキングもありません。App Store 版はオンデバイス AI エンジンのみで、リモート LLM は一切搭載していません。アプリ内の「プライバシー監査」パネルで保存先を確認でき、<b>パケットキャプチャで検証</b>もできます。</div>
+    </details>
+    <details class="faq-item">
+      <summary>無料の Apple Reminders と比べて何が違う?</summary>
+      <div class="ans">Reminders は iOS 26 でオンデバイス化し、自然言語でのタスク作成もできるようになりました —— しかし<b>デフォルトで iCloud に同期</b>され、モデルも<b>固定</b>です。KinetTask は一切ネットに接続せず、<b>モデルを自由に選択</b>でき、タスクライブラリ全体を推論(デイリーインサイト・競合検出・タスク分解)します。</div>
+    </details>
+    <details class="faq-item">
+      <summary>ネットなし / Apple FM 非対応のデバイスでも使える?</summary>
+      <div class="ans">使えます。3 層エンジンが自動で切り替えます: Apple FM が使えなければダウンロード済みのローカル GGUF モデルで実行。モデルが一切なくても、<b>内蔵ルール解析</b>が「明日の午後 3 時に会議」を正しく読み取ります。完全オフラインでも問題なく動作。</div>
+    </details>
+    <details class="faq-item">
+      <summary>無料で使える?</summary>
+      <div class="ans">無料版で日常利用は十分(アクティブタスク最大 50 件)、<b>サブスクなし</b>。Pro は<b>買い切り</b>で、タスク無制限・AI タスク分解・推論検索・テーマがアンロックされます —— 一度買えば、所有するすべてのデバイスで永久に使えます。</div>
+    </details>
+    <details class="faq-item">
+      <summary>対応デバイスは?</summary>
+      <div class="ans">macOS 14+ と iOS 17+。Apple Foundation Models には macOS 26 / iOS 26 が必要で、旧システムではローカルモデルまたはルール解析にフォールバックします。Linux / Windows には非対応 —— Apple FM や WidgetKit は Apple 専用であり、クロスプラットフォームはまた別のプロダクトです。</div>
+    </details>
+    <details class="faq-item">
+      <summary>タスクが消えることは?</summary>
+      <div class="ans">ありません。ローカル SQLite + WAL ジャーナルにより、アプリがクラッシュしてもタスクはディスク上に残ります。再起動時にディスクからすべて読み込みます。</div>
+    </details>
+  </div>
+</section>
+
+<section>
+  <div class="final reveal">
+    <div class="ic">✓<img src="app-icon.png" alt=""></div>
+    <h2>準備はいいですか、<span class="accent">タスクがあなたを理解する時代へ</span></h2>
+    <p class="sub">賢く、プライベート、無料。まもなく App Store に登場。</p>
+    <div class="final-cta">
+      <a class="btn btn-apple btn-lg" href="https://apps.apple.com/app/id6780944289">
+        <svg width="16" height="18" viewBox="0 0 384 512" fill="currentColor"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
+        App Store <span class="soon">近日公開</span>
+      </a>
+    </div>
+  </div>
+</section>
+</section>
 
 </main>
-
 <footer>
   <div class="foot-in">
     <div class="foot-brand">
       <div class="fb"><span class="logo">✓<img src="app-icon.png" alt=""></span> KinetTask</div>
-      <p>本地优先的 AI 任务管理器。比 Reminders 聪明, 比 Todoist 私密, 比 Things 懂你。</p>
+      <p data-i="foot1">本地优先的 AI 任务管理器。比 Reminders 聪明, 比 Todoist 私密, 比 Things 懂你。</p>
     </div>
     <div class="foot-cols">
       <div class="foot-col">
-        <h5>产品</h5>
-        <a href="#features">功能</a>
-        <a href="#magic">自然语言</a>
-        <a href="#engine">三层引擎</a>
-        <a href="#design">设计</a>
+        <h5 data-i="footH1">产品</h5>
+        <a href="#features" data-i="footA1">功能</a>
+        <a href="#magic" data-i="footA2">自然语言</a>
+        <a href="#engine" data-i="footA3">三层引擎</a>
+        <a href="#design" data-i="footA4">设计</a>
       </div>
       <div class="foot-col">
-        <h5>关于</h5>
-        <a href="#privacy">隐私承诺</a>
-        <a href="#compare">竞品对比</a>
-        <a href="#faq">常见问题</a>
-        <a href="https://taskflow.app/privacy">隐私政策</a>
+        <h5 data-i="footH2">关于</h5>
+        <a href="#privacy" data-i="footA5">隐私承诺</a>
+        <a href="#compare" data-i="footA6">竞品对比</a>
+        <a href="#faq" data-i="footA7">常见问题</a>
+        <a href="privacy.html" data-i="footA8">隐私政策</a>
       </div>
       <div class="foot-col">
-        <h5>获取</h5>
+        <h5 data-i="footH3">获取</h5>
         <!-- App Store ID: 6780944289 已接入。 -->
-        <a href="https://apps.apple.com/app/id6780944289">App Store · 即将上线</a>
-        <a href="mailto:phinn@outlook.com">联系开发者</a>
+        <a href="https://apps.apple.com/app/id6780944289" data-i="footA9">App Store · 即将上线</a>
+        <a href="mailto:phinn@outlook.com" data-i="footA10">联系开发者</a>
       </div>
     </div>
   </div>
@@ -616,6 +1579,38 @@
 </footer>
 
 <script>
+  // ===== i18n: nav/footer/title 文案 + 语言切换 =====
+  const I18N={
+    'zh-Hans':{nav1:'功能',nav2:'自然语言',nav3:'隐私',nav4:'对比',nav5:'FAQ',soon:'即将上线',foot1:'本地优先的 AI 任务管理器。比 Reminders 聪明, 比 Todoist 私密, 比 Things 懂你。',footH1:'产品',footA1:'功能',footA2:'自然语言',footA3:'三层引擎',footA4:'设计',footH2:'关于',footA5:'隐私承诺',footA6:'竞品对比',footA7:'常见问题',footA8:'隐私政策',footH3:'获取',footA9:'App Store · 即将上线',footA10:'联系开发者',title:'KinetTask — 本地 AI 任务管理 · 完全离线 · 0 上传'},
+    'zh-Hant':{nav1:'功能',nav2:'自然語言',nav3:'隱私',nav4:'對比',nav5:'FAQ',soon:'即將上架',foot1:'本地優先的 AI 任務管理器。比 Reminders 聰明, 比 Todoist 私密, 比 Things 懂你。',footH1:'產品',footA1:'功能',footA2:'自然語言',footA3:'三層引擎',footA4:'設計',footH2:'關於',footA5:'隱私承諾',footA6:'競品對比',footA7:'常見問題',footA8:'隱私政策',footH3:'取得',footA9:'App Store · 即將上架',footA10:'聯絡開發者',title:'KinetTask — 本地 AI 任務管理 · 完全離線 · 0 上傳'},
+    'en':{nav1:'Features',nav2:'Natural Language',nav3:'Privacy',nav4:'Compare',nav5:'FAQ',soon:'Coming Soon',foot1:'A local-first AI task manager. Smarter than Reminders, more private than Todoist, more understanding than Things.',footH1:'Product',footA1:'Features',footA2:'Natural Language',footA3:'Three-tier Engine',footA4:'Design',footH2:'About',footA5:'Privacy Promise',footA6:'Compare',footA7:'FAQ',footA8:'Privacy Policy',footH3:'Get',footA9:'App Store · Coming Soon',footA10:'Contact the Developer',title:'KinetTask — Local AI Task Manager · Fully Offline · 0 Upload'},
+    'ja':{nav1:'機能',nav2:'自然言語',nav3:'プライバシー',nav4:'比較',nav5:'FAQ',soon:'近日公開',foot1:'ローカルファーストの AI タスク管理アプリ。Reminders より賢く、Todoist よりプライベート、Things より理解します。',footH1:'製品',footA1:'機能',footA2:'自然言語',footA3:'3 層エンジン',footA4:'デザイン',footH2:'情報',footA5:'プライバシー誓約',footA6:'競合比較',footA7:'よくある質問',footA8:'プライバシーポリシー',footH3:'入手',footA9:'App Store · 近日公開',footA10:'開発者に連絡',title:'KinetTask — ローカル AI タスク管理 · 完全オフライン · アップロード 0'}
+  };
+  const LANG_KEY='kt_site_lang';
+  function applyLang(lang){
+    document.querySelectorAll('.lang-block').forEach(b=>{b.hidden=(b.dataset.lang!==lang);});
+    const dict=I18N[lang];
+    if(dict){
+      document.querySelectorAll('[data-i]').forEach(el=>{const k=el.dataset.i; if(dict[k]!==undefined)el.textContent=dict[k];});
+      document.title=dict.title;
+      const html=document.documentElement;
+      html.lang=(lang==='zh-Hans')?'zh-CN':lang;
+    }
+    document.querySelectorAll('#langSw button').forEach(b=>b.classList.toggle('on',b.dataset.lang===lang));
+    try{localStorage.setItem(LANG_KEY,lang);}catch(e){}
+    startTypewriter(lang);
+  }
+  document.getElementById('langSw').addEventListener('click',e=>{
+    const b=e.target.closest('button[data-lang]');
+    if(b)applyLang(b.dataset.lang);
+  });
+  let initialLang='en';
+  try{
+    const saved=localStorage.getItem(LANG_KEY);
+    if(saved&&I18N[saved])initialLang=saved;
+  }catch(e){}
+  applyLang(initialLang);
+
   // scroll reveal
   const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.12,rootMargin:'0px 0px -40px 0px'});
   document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
@@ -626,25 +1621,44 @@
   const spy=new IntersectionObserver((es)=>{es.forEach(s=>{if(s.isIntersecting){links.forEach(l=>l.style.color='');const a=links.find(l=>l.getAttribute('href')==='#'+s.target.id);if(a)a.style.color='var(--text)';}});},{rootMargin:'-45% 0px -50% 0px'});
   secs.forEach(s=>spy.observe(s));
 
-  // typewriter for NL demo
-  const typedEl=document.getElementById('typed');
-  const phrases=['明天下午 3 点开周会','周五前交季度报告 #紧急','下周一上午 10 点跟设计评审'];
-  let pi=0,ci=0,deleting=false;
+  // typewriter for NL demo (per-language phrases)
+  const PHRASES={
+    'zh-Hans':['明天下午 3 点开周会','周五前交季度报告 #紧急','下周一上午 10 点跟设计评审'],
+    'zh-Hant':['明天下午 3 點開週會','週五前交季度報告 #緊急','下週一上午 10 點跟設計評審'],
+    'en':['Weekly meeting tomorrow 3pm','Quarterly report due Friday #urgent','Design review Monday 10am'],
+    'ja':['明日の午後 3 時に週次会議','金曜までに四半期レポート #緊急','月曜 10 時にデザインレビュー']
+  };
+  let typedEl=null,twLang='zh-Hans',twTimer=null,pi=0,ci=0,deleting=false;
+  let twStarted=false;
   function tick(){
-    const cur=phrases[pi];
+    if(!typedEl)return;
+    const phrases=PHRASES[twLang]||PHRASES['en'];
+    const cur=phrases[pi%phrases.length];
     if(!deleting){
       typedEl.textContent=cur.slice(0,++ci);
-      if(ci===cur.length){deleting=true;return setTimeout(tick,1900);}
+      if(ci===cur.length){deleting=true;twTimer=setTimeout(tick,1900);return;}
     }else{
       typedEl.textContent=cur.slice(0,--ci);
       if(ci===0){deleting=false;pi=(pi+1)%phrases.length;}
     }
-    setTimeout(tick,deleting?45:80);
+    twTimer=setTimeout(tick,deleting?45:80);
   }
-  // start typing when demo scrolls into view
-  const demoSpy=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){tick();demoSpy.disconnect();}});},{threshold:.4});
-  const demoSec=document.getElementById('magic');
-  if(demoSec)demoSpy.observe(demoSec);
+  function startTypewriter(lang){
+    twLang=PHRASES[lang]?lang:'en';
+    clearTimeout(twTimer); pi=0; ci=0; deleting=false;
+    const activeBlock=document.querySelector('.lang-block:not([hidden])');
+    typedEl=activeBlock?activeBlock.querySelector('.typed'):null;
+    if(typedEl)typedEl.textContent='';
+    if(!twStarted){
+      twStarted=true;
+      // 滚动到 NL demo 时启动
+      const demoSec=activeBlock?activeBlock.querySelector('#magic'):null;
+      if(demoSec){
+        const demoSpy=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting&&typedEl){clearTimeout(twTimer);tick();}});},{threshold:.4});
+        demoSpy.observe(demoSec);
+      }
+    }
+  }
 </script>
 </body>
 </html>

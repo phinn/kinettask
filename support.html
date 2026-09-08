@@ -16,7 +16,7 @@
   * { box-sizing: border-box; }
   body {
     margin: 0; background: var(--bg); color: var(--ink);
-    font: 16px/1.7 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font: 16px/1.7 -apple-system, BlinkMacSystemFont, "SF Pro Display", "PingFang SC", "Hiragino Sans", "Helvetica Neue", sans-serif;
     -webkit-font-smoothing: antialiased;
   }
   .wrap { max-width: 760px; margin: 0 auto; padding: 48px 24px 96px; }
@@ -24,6 +24,7 @@
   h1 { font-size: 30px; margin: 0 0 6px; letter-spacing: -0.01em; }
   .sub { color: var(--muted); font-size: 15px; }
   h2 { font-size: 21px; margin: 40px 0 10px; letter-spacing: -0.01em; }
+  h3 { font-size: 16px; margin: 22px 0 6px; }
   p, li { color: var(--ink); }
   ul { padding-left: 20px; }
   .muted { color: var(--muted); }
@@ -42,11 +43,26 @@
   a { color: var(--accent); }
   hr { border: 0; border-top: 1px solid var(--line); margin: 40px 0; }
   footer { color: var(--muted); font-size: 14px; margin-top: 48px; }
+
+  /* lang switch */
+  .lang-sw { position: fixed; top: 14px; right: 16px; z-index: 99; display: flex; gap: 2px;
+    background: var(--tint); border: 1px solid var(--line); border-radius: 9px; padding: 3px; }
+  .lang-sw button { border: none; background: transparent; color: var(--muted); font-family: inherit;
+    font-size: 11.5px; font-weight: 650; padding: 4px 9px; border-radius: 6px; cursor: pointer; transition: .15s; }
+  .lang-sw button.on { background: var(--accent); color: #fff; }
 </style>
 </head>
 <body>
+<div class="lang-sw" id="langSw">
+  <button data-lang="en" class="on">EN</button>
+  <button data-lang="zh-Hans">简</button>
+  <button data-lang="zh-Hant">繁</button>
+  <button data-lang="ja">日</button>
+</div>
 <div class="wrap">
 
+<!-- EN -->
+<article class="lang-block" data-lang="en">
 <header>
   <h1>KinetTask Support</h1>
   <div class="sub">An on-device AI task manager for iPhone &amp; Mac</div>
@@ -98,7 +114,177 @@ sync may come as an opt-in feature in a future release.</p>
 <footer>
   <p class="muted">© 2026 KinetTask. Your tasks, only on your device.</p>
 </footer>
+</article>
+
+<!-- zh-Hans -->
+<article class="lang-block" data-lang="zh-Hans" hidden>
+<header>
+  <h1>KinetTask 支持</h1>
+  <div class="sub">iPhone 与 Mac 的设备端 AI 任务管理器</div>
+</header>
+
+<p>需要帮助？这里告诉你如何用好 KinetTask —— 以及如何联系我们。</p>
+
+<a class="btn" href="mailto:phinn@outlook.com">邮件支持 ✉️</a>
+
+<h2>常见问题</h2>
+
+<h3>我的数据存在哪里？</h3>
+<p>完全存在你的设备上，位于 app 沙盒内，任何内容都不上传。macOS 上你可以在
+<span class="mono">~/Library/Containers/com.kitnet.task.app/Data/Library/Application Support/KinetTask/</span>
+找到本地数据库。你可以用 Time Machine 或任何备份工具备份。</p>
+
+<h3>如何删除我的全部数据？</h3>
+<p>在 app 内删除你的任务，或者直接卸载 KinetTask —— 即可清除一切。没有账号需要删除，因为 KinetTask 根本没有账号系统。</p>
+
+<h3>AI（任务拆解 / 相关任务）效果不明显。</h3>
+<p>这些功能在 <strong>3B 及以上的本地模型</strong>或 <strong>Apple Foundation Models</strong>（macOS 26 / iOS 26）下效果最佳。打开「设置 → AI」并加载更大的模型。模型很小或未加载时，KinetTask 会回退到内置规则解析 —— 任务仍能正确捕获，只是 AI 推理少一些。</p>
+
+<h3>自然语言输入没有解析出日期。</h3>
+<p>试着把时间说得更明确（例如「明天下午3点」/ "tomorrow 3pm"）。即使没有模型，KinetTask 的规则解析器也能处理常见的日期和时间；加载模型可以进一步提升标题与标签的提取质量。</p>
+
+<h3>KinetTask 会在我的设备之间同步吗？</h3>
+<p>当前版本不会。一切数据都按设计留在本地（这正是隐私承诺的一部分）。iCloud 同步可能在未来版本作为可选功能提供。</p>
+
+<h2>隐私</h2>
+<div class="callout">
+  KinetTask 不收集任何数据 —— 无分析、无崩溃上报、无追踪、无账号。阅读完整<a href="privacy.html">隐私政策</a>。
+</div>
+
+<h2>联系我们</h2>
+<ul>
+  <li><strong>邮箱：</strong><a href="mailto:phinn@outlook.com">phinn@outlook.com</a></li>
+  <li>请附上你的 macOS / iOS 版本以及问题的简要描述。</li>
+</ul>
+
+<hr>
+<footer>
+  <p class="muted">© 2026 KinetTask. 你的任务，只在你的设备上。</p>
+</footer>
+</article>
+
+<!-- zh-Hant -->
+<article class="lang-block" data-lang="zh-Hant" hidden>
+<header>
+  <h1>KinetTask 支援</h1>
+  <div class="sub">iPhone 與 Mac 的裝置端 AI 任務管理器</div>
+</header>
+
+<p>需要協助？這裡告訴你如何用好 KinetTask —— 以及如何聯絡我們。</p>
+
+<a class="btn" href="mailto:phinn@outlook.com">郵件支援 ✉️</a>
+
+<h2>常見問題</h2>
+
+<h3>我的資料存在哪裡？</h3>
+<p>完全存在你的裝置上，位於 app 沙盒內，任何內容都不上傳。macOS 上你可以在
+<span class="mono">~/Library/Containers/com.kitnet.task.app/Data/Library/Application Support/KinetTask/</span>
+找到本地資料庫。你可以用 Time Machine 或任何備份工具備份。</p>
+
+<h3>如何刪除我的全部資料？</h3>
+<p>在 app 內刪除你的任務，或者直接解除安裝 KinetTask —— 即可清除一切。沒有帳號需要刪除，因為 KinetTask 根本沒有帳號系統。</p>
+
+<h3>AI（任務拆解 / 相關任務）效果不明顯。</h3>
+<p>這些功能在 <strong>3B 及以上的本地模型</strong>或 <strong>Apple Foundation Models</strong>（macOS 26 / iOS 26）下效果最佳。開啟「設定 → AI」並載入更大的模型。模型很小或未載入時，KinetTask 會回退到內建規則解析 —— 任務仍能正確擷取，只是 AI 推理少一些。</p>
+
+<h3>自然語言輸入沒有解析出日期。</h3>
+<p>試著把時間說得更明確（例如「明天下午3點」/ "tomorrow 3pm"）。即使沒有模型，KinetTask 的規則解析器也能處理常見的日期和時間；載入模型可以進一步提升標題與標籤的擷取品質。</p>
+
+<h3>KinetTask 會在我的裝置之間同步嗎？</h3>
+<p>目前版本不會。一切資料都按設計留在本地（這正是隱私承諾的一部分）。iCloud 同步可能在未來版本作為可選功能提供。</p>
+
+<h2>隱私</h2>
+<div class="callout">
+  KinetTask 不收集任何資料 —— 無分析、無當機回報、無追蹤、無帳號。閱讀完整<a href="privacy.html">隱私政策</a>。
+</div>
+
+<h2>聯絡我們</h2>
+<ul>
+  <li><strong>信箱：</strong><a href="mailto:phinn@outlook.com">phinn@outlook.com</a></li>
+  <li>請附上你的 macOS / iOS 版本以及問題的簡要描述。</li>
+</ul>
+
+<hr>
+<footer>
+  <p class="muted">© 2026 KinetTask. 你的任務，只在你的裝置上。</p>
+</footer>
+</article>
+
+<!-- ja -->
+<article class="lang-block" data-lang="ja" hidden>
+<header>
+  <h1>KinetTask サポート</h1>
+  <div class="sub">iPhone と Mac のオンデバイス AI タスク管理</div>
+</header>
+
+<p>お困りですか？KinetTask を最大限に活用する方法と、お問い合わせ先をご案内します。</p>
+
+<a class="btn" href="mailto:phinn@outlook.com">メールでサポート ✉️</a>
+
+<h2>よくある質問</h2>
+
+<h3>データはどこに保存されますか？</h3>
+<p>完全にあなたのデバイス上、アプリのサンドボックス内です。アップロードは一切ありません。macOS のローカルデータベースは
+<span class="mono">~/Library/Containers/com.kitnet.task.app/Data/Library/Application Support/KinetTask/</span>
+にあります。Time Machine や任意のバックアップツールでバックアップできます。</p>
+
+<h3>全データを削除するには？</h3>
+<p>アプリ内でタスクを削除するか、KinetTask をアンインストールしてください —— それですべて消去されます。削除すべきアカウントは存在しません。KinetTask にはアカウントシステムがないからです。</p>
+
+<h3>AI（タスク分解・関連タスク）の効果が今ひとつです。</h3>
+<p>これらの機能は <strong>3B 以上のローカルモデル</strong>または <strong>Apple Foundation Models</strong>（macOS 26 / iOS 26）で最も効果を発揮します。「設定 → AI」を開いてより大きなモデルをロードしてください。モデルが小さい、または未ロードの場合、KinetTask は内蔵ルール解析にフォールバックします —— タスクは正しく取り込まれますが、AI 推理は控えめになります。</p>
+
+<h3>自然言語入力で日付が解析されません。</h3>
+<p>時間を明示的に表現してみてください（例：「明日の午後3時」/ "tomorrow 3pm"）。モデルがなくても、KinetTask のルールパーサーは一般的な日付と時刻を処理します。モデルをロードするとタイトルとタグの抽出精度がさらに向上します。</p>
+
+<h3>デバイス間で同期しますか？</h3>
+<p>現在のバージョンでは同期しません。すべてのデータは設計上ローカルに留まります（それがプライバシー承诺です）。iCloud 同期は将来のリリースでオプトイン機能として提供される可能性があります。</p>
+
+<h2>プライバシー</h2>
+<div class="callout">
+  KinetTask はデータを一切収集しません —— 分析なし、クラッシュレポートなし、トラッキングなし、アカウントなし。完全な<a href="privacy.html">プライバシーポリシー</a>をお読みください。
+</div>
+
+<h2>お問い合わせ</h2>
+<ul>
+  <li><strong>メール：</strong><a href="mailto:phinn@outlook.com">phinn@outlook.com</a></li>
+  <li>macOS / iOS のバージョンと問題の簡単な説明を添えてください。</li>
+</ul>
+
+<hr>
+<footer>
+  <p class="muted">© 2026 KinetTask. あなたのタスクは、あなたのデバイスの中だけに。</p>
+</footer>
+</article>
 
 </div>
+
+<script>
+  const I18N_S={
+    'en':'KinetTask — Support',
+    'zh-Hans':'KinetTask — 支持',
+    'zh-Hant':'KinetTask — 支援',
+    'ja':'KinetTask — サポート'
+  };
+  const LANG_KEY='kt_support_lang';
+  function applyLang(lang){
+    document.querySelectorAll('.lang-block').forEach(b=>{b.hidden=(b.dataset.lang!==lang);});
+    if(I18N_S[lang])document.title=I18N_S[lang];
+    const html=document.documentElement;
+    html.lang=(lang==='zh-Hans')?'zh-CN':lang;
+    document.querySelectorAll('#langSw button').forEach(b=>b.classList.toggle('on',b.dataset.lang===lang));
+    try{localStorage.setItem(LANG_KEY,lang);}catch(e){}
+  }
+  document.getElementById('langSw').addEventListener('click',e=>{
+    const b=e.target.closest('button[data-lang]');
+    if(b)applyLang(b.dataset.lang);
+  });
+  let initial='en';
+  try{
+    const saved=localStorage.getItem(LANG_KEY);
+    if(saved&&I18N_S[saved])initial=saved;
+  }catch(e){}
+  applyLang(initial);
+</script>
 </body>
 </html>

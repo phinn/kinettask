@@ -16,7 +16,7 @@
   * { box-sizing: border-box; }
   body {
     margin: 0; background: var(--bg); color: var(--ink);
-    font: 16px/1.7 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font: 16px/1.7 -apple-system, BlinkMacSystemFont, "SF Pro Display", "PingFang SC", "Hiragino Sans", "Helvetica Neue", sans-serif;
     -webkit-font-smoothing: antialiased;
   }
   .wrap { max-width: 760px; margin: 0 auto; padding: 48px 24px 96px; }
@@ -48,11 +48,26 @@
   a { color: var(--accent); }
   hr { border: 0; border-top: 1px solid var(--line); margin: 40px 0; }
   footer { color: var(--muted); font-size: 14px; margin-top: 48px; }
+
+  /* lang switch */
+  .lang-sw { position: fixed; top: 14px; right: 16px; z-index: 99; display: flex; gap: 2px;
+    background: var(--tint); border: 1px solid var(--line); border-radius: 9px; padding: 3px; }
+  .lang-sw button { border: none; background: transparent; color: var(--muted); font-family: inherit;
+    font-size: 11.5px; font-weight: 650; padding: 4px 9px; border-radius: 6px; cursor: pointer; transition: .15s; }
+  .lang-sw button.on { background: var(--accent); color: #fff; }
 </style>
 </head>
 <body>
+<div class="lang-sw" id="langSw">
+  <button data-lang="en" class="on">EN</button>
+  <button data-lang="zh-Hans">简</button>
+  <button data-lang="zh-Hant">繁</button>
+  <button data-lang="ja">日</button>
+</div>
 <div class="wrap">
 
+<!-- EN -->
+<article class="lang-block" data-lang="en">
 <header>
   <h1>KinetTask Privacy Policy</h1>
   <div class="sub">Last updated: June 16, 2026</div>
@@ -162,7 +177,312 @@ page. Continued use constitutes acceptance of the updated policy.</p>
   phinn@outlook.com</p>
   <p class="muted">This policy applies to the macOS and iOS versions of KinetTask. © 2026 KinetTask.</p>
 </footer>
+</article>
+
+<!-- zh-Hans -->
+<article class="lang-block" data-lang="zh-Hans" hidden>
+<header>
+  <h1>KinetTask 隐私政策</h1>
+  <div class="sub">最近更新：2026 年 6 月 16 日</div>
+  <span class="badge">✓ 我们不收集你的任何数据</span>
+</header>
+
+<p>KinetTask 是一款 <strong>100% 运行在你设备上</strong>的 AI 任务管理器。本政策如实说明 KinetTask 如何处理你的信息。简短版本：<strong>你的任务、备注以及所有 AI 处理都只发生在你的设备上。我们不收集任何数据、不上传任何内容、不追踪任何人。</strong></p>
+
+<div class="callout">
+  <strong>一句话总结：</strong>KinetTask 没有账号、没有云端后端、没有分析 SDK、没有广告、没有追踪。唯一的网络活动是你主动下载公开的模型文件 —— 它绝不会把你的内容发送到任何地方。
+</div>
+
+<h2>1. 我们收集哪些信息</h2>
+<p><strong>无。</strong>KinetTask 不收集任何个人数据，包括：</p>
+<ul>
+  <li>不收集使用情况或分析数据</li>
+  <li>无崩溃上报（未集成任何崩溃上报 SDK）</li>
+  <li>无广告追踪或用户画像（无 IDFA、无设备指纹）</li>
+  <li>无需注册或登录 —— 没有账号系统</li>
+  <li>你的任务、备注、标签或输入的任何内容都绝不上传</li>
+</ul>
+
+<h2>2. 你的数据存在哪里</h2>
+<p>所有任务数据都存储在<strong>你设备上的本地数据库</strong>中，位于 app 的沙盒容器内：</p>
+<ul>
+  <li><span class="mono">tasks.sqlite3</span> — 任务数据</li>
+  <li><span class="mono">search.sqlite3</span> — 全文搜索索引（FTS5）</li>
+  <li><span class="mono">projects.sqlite3</span> — 项目数据</li>
+</ul>
+<p class="muted">macOS 路径：<span class="mono">~/Library/Containers/com.kitnet.task.app/Data/Library/Application Support/KinetTask/</span><br>
+这些文件属于你。你可以随时用 Time Machine 或任何备份工具进行备份。</p>
+
+<h2>3. AI 如何工作（完全在设备端）</h2>
+<p>KinetTask 的 AI 功能（自然语言解析、任务拆解、相关任务推荐、每日洞察）<strong>完全在你的设备上运行</strong>：</p>
+<ul>
+  <li><strong>Apple Foundation Models</strong> — 系统内置的设备端模型（macOS 26 / iOS 26）。</li>
+  <li><strong>本地 GGUF 模型（Llama.cpp）</strong> — 你自行选择下载的模型，在你的设备上进程内运行。</li>
+</ul>
+<p><strong>App Store 版本不提供任何远程（云端）AI。</strong>你的任务内容绝不会离开设备去做 AI 处理。即使没有加载任何模型，KinetTask 也会回退到内置规则引擎，完成基础的日期与优先级解析。</p>
+
+<h2>4. 网络使用情况（如实说明）</h2>
+<p>KinetTask 默认离线工作。<strong>只有当你主动下载模型文件时</strong>才会发起网络请求，获取的是<strong>公开的开源模型文件</strong>，其中不包含你的任何数据：</p>
+
+<table class="net-table">
+  <tr><th>活动</th><th>联网？</th><th>说明</th></tr>
+  <tr><td>创建、编辑、删除任务；AI 解析；搜索</td><td>否</td><td>完全离线</td></tr>
+  <tr><td>下载 GGUF 模型</td><td>是</td><td>从 HuggingFace（可选 hf-mirror.com 镜像）获取公开模型文件。仅由你主动触发；不发送任何用户数据。</td></tr>
+</table>
+<p class="muted">除上述情况外，KinetTask 不会发起任何出站网络连接。源代码可审计。</p>
+
+<h2>5. 系统权限</h2>
+<p>KinetTask <strong>不申请</strong>相机、麦克风、定位、通讯录、照片、健康或任何其他敏感系统权限。如果你通过文件选择器导入本地 GGUF 模型，app 只会在你授权的范围内读取该文件。</p>
+
+<h2>6. 第三方组件</h2>
+<p>KinetTask 使用以下开源组件，它们均不传输数据：</p>
+<ul>
+  <li><strong>LocalLLMKit</strong>（MIT）— 本地 LLM 推理抽象层，设备端运行。</li>
+  <li><strong>SQLite.swift</strong>（MIT）— 本地数据库封装。</li>
+  <li><strong>Apple FoundationModels</strong>（系统框架）— 设备端 AI。</li>
+</ul>
+<p>下载的模型为开放权重模型（如 Qwen2.5 / Qwen3），受其各自开源许可证约束。</p>
+
+<h2>7. 数据安全</h2>
+<p>所有数据都保存在本地 app 沙盒中，并受 macOS / iOS 应用沙盒与系统加密保护，因此你的数据不存在被传输给我们或任何第三方服务器的风险。App 已启用 App Sandbox 与 Hardened Runtime。</p>
+
+<h2>8. 你的权利（数据属于你）</h2>
+<ul>
+  <li><strong>导出</strong>：你的数据就是上文列出的本地数据库文件 —— 随时拷贝即可备份。</li>
+  <li><strong>删除</strong>：在 app 内删除任务，或直接卸载 app 即可彻底清除所有数据。</li>
+  <li><strong>无需删除账号</strong>：KinetTask 没有账号，因此不存在账号删除流程。</li>
+</ul>
+
+<h2>9. 儿童</h2>
+<p>KinetTask 不面向 13 岁以下儿童，也不会有意收集儿童的任何信息。App Store 年龄分级为 4+。</p>
+
+<h2>10. iCloud 同步</h2>
+<p><strong>当前版本（1.x）不提供 iCloud 同步。</strong>相关代码存在但默认禁用。如果未来版本提供该功能，同步将通过你 Apple ID 下的 iCloud 私有数据库进行、由 Apple 端到端加密，且<strong>仅在你明确开启后</strong>才会发生。届时我们会先更新本政策。你也可以随时在系统设置中将其关闭。</p>
+
+<h2>11. 政策变更</h2>
+<p>如果本政策发生重大变更，我们会通过 app 更新或在本页面通知你。继续使用即表示接受更新后的政策。</p>
+
+<hr>
+
+<footer>
+  <p><strong>联系方式</strong><br>
+  phinn@outlook.com</p>
+  <p class="muted">本政策适用于 KinetTask 的 macOS 与 iOS 版本。© 2026 KinetTask.</p>
+</footer>
+</article>
+
+<!-- zh-Hant -->
+<article class="lang-block" data-lang="zh-Hant" hidden>
+<header>
+  <h1>KinetTask 隱私政策</h1>
+  <div class="sub">最近更新：2026 年 6 月 16 日</div>
+  <span class="badge">✓ 我們不收集你的任何資料</span>
+</header>
+
+<p>KinetTask 是一款 <strong>100% 執行在你裝置上</strong>的 AI 任務管理器。本政策如實說明 KinetTask 如何處理你的資訊。簡短版本：<strong>你的任務、備註以及所有 AI 處理都只發生在你的裝置上。我們不收集任何資料、不上傳任何內容、不追蹤任何人。</strong></p>
+
+<div class="callout">
+  <strong>一句話總結：</strong>KinetTask 沒有帳號、沒有雲端後端、沒有分析 SDK、沒有廣告、沒有追蹤。唯一的網路活動是你主動下載公開的模型檔案 —— 它絕不會把你的內容傳送到任何地方。
+</div>
+
+<h2>1. 我們收集哪些資訊</h2>
+<p><strong>無。</strong>KinetTask 不收集任何個人資料，包括：</p>
+<ul>
+  <li>不收集使用情況或分析資料</li>
+  <li>無當機回報（未整合任何當機回報 SDK）</li>
+  <li>無廣告追蹤或使用者畫像（無 IDFA、無裝置指紋）</li>
+  <li>無需註冊或登入 —— 沒有帳號系統</li>
+  <li>你的任務、備註、標籤或輸入的任何內容都絕不上傳</li>
+</ul>
+
+<h2>2. 你的資料存在哪裡</h2>
+<p>所有任務資料都儲存在<strong>你裝置上的本地資料庫</strong>中，位於 app 的沙盒容器內：</p>
+<ul>
+  <li><span class="mono">tasks.sqlite3</span> — 任務資料</li>
+  <li><span class="mono">search.sqlite3</span> — 全文搜尋索引（FTS5）</li>
+  <li><span class="mono">projects.sqlite3</span> — 專案資料</li>
+</ul>
+<p class="muted">macOS 路徑：<span class="mono">~/Library/Containers/com.kitnet.task.app/Data/Library/Application Support/KinetTask/</span><br>
+這些檔案屬於你。你可以隨時用 Time Machine 或任何備份工具進行備份。</p>
+
+<h2>3. AI 如何運作（完全在裝置端）</h2>
+<p>KinetTask 的 AI 功能（自然語言解析、任務拆解、相關任務推薦、每日洞察）<strong>完全在你的裝置上執行</strong>：</p>
+<ul>
+  <li><strong>Apple Foundation Models</strong> — 系統內建的裝置端模型（macOS 26 / iOS 26）。</li>
+  <li><strong>本地 GGUF 模型（Llama.cpp）</strong> — 你自行選擇下載的模型，在你的裝置上行程內執行。</li>
+</ul>
+<p><strong>App Store 版本不提供任何遠端（雲端）AI。</strong>你的任務內容絕不會離開裝置去做 AI 處理。即使沒有載入任何模型，KinetTask 也會回退到內建規則引擎，完成基礎的日期與優先級解析。</p>
+
+<h2>4. 網路使用情況（如實說明）</h2>
+<p>KinetTask 預設離線工作。<strong>只有當你主動下載模型檔案時</strong>才會發起網路請求，取得的是<strong>公開的開源模型檔案</strong>，其中不包含你的任何資料：</p>
+
+<table class="net-table">
+  <tr><th>活動</th><th>連網？</th><th>說明</th></tr>
+  <tr><td>建立、編輯、刪除任務；AI 解析；搜尋</td><td>否</td><td>完全離線</td></tr>
+  <tr><td>下載 GGUF 模型</td><td>是</td><td>從 HuggingFace（可選 hf-mirror.com 鏡像）取得公開模型檔案。僅由你主動觸發；不傳送任何使用者資料。</td></tr>
+</table>
+<p class="muted">除上述情況外，KinetTask 不會發起任何出站網路連線。原始碼可稽核。</p>
+
+<h2>5. 系統權限</h2>
+<p>KinetTask <strong>不申請</strong>相機、麥克風、定位、通訊錄、照片、健康或任何其他敏感系統權限。如果你透過檔案選擇器匯入本地 GGUF 模型，app 只會在你授權的範圍內讀取該檔案。</p>
+
+<h2>6. 第三方元件</h2>
+<p>KinetTask 使用以下開源元件，它們均不傳輸資料：</p>
+<ul>
+  <li><strong>LocalLLMKit</strong>（MIT）— 本地 LLM 推理抽象層，裝置端執行。</li>
+  <li><strong>SQLite.swift</strong>（MIT）— 本地資料庫封裝。</li>
+  <li><strong>Apple FoundationModels</strong>（系統框架）— 裝置端 AI。</li>
+</ul>
+<p>下載的模型為開放權重模型（如 Qwen2.5 / Qwen3），受其各自開源授權條款約束。</p>
+
+<h2>7. 資料安全</h2>
+<p>所有資料都保存在本地 app 沙盒中，並受 macOS / iOS 應用沙盒與系統加密保護，因此你的資料不存在被傳輸給我們或任何第三方伺服器的風險。App 已啟用 App Sandbox 與 Hardened Runtime。</p>
+
+<h2>8. 你的權利（資料屬於你）</h2>
+<ul>
+  <li><strong>匯出</strong>：你的資料就是上文列出的本地資料庫檔案 —— 隨時拷貝即可備份。</li>
+  <li><strong>刪除</strong>：在 app 內刪除任務，或直接解除安裝 app 即可徹底清除所有資料。</li>
+  <li><strong>無需刪除帳號</strong>：KinetTask 沒有帳號，因此不存在帳號刪除流程。</li>
+</ul>
+
+<h2>9. 兒童</h2>
+<p>KinetTask 不面向 13 歲以下兒童，也不會有意收集兒童的任何資訊。App Store 年齡分級為 4+。</p>
+
+<h2>10. iCloud 同步</h2>
+<p><strong>目前版本（1.x）不提供 iCloud 同步。</strong>相關程式碼存在但預設停用。如果未來版本提供該功能，同步將透過你 Apple ID 下的 iCloud 私有資料庫進行、由 Apple 端對端加密，且<strong>僅在你明確開啟後</strong>才會發生。屆時我們會先更新本政策。你也可以隨時在系統設定中將其關閉。</p>
+
+<h2>11. 政策變更</h2>
+<p>如果本政策發生重大變更，我們會透過 app 更新或在本頁面通知你。繼續使用即表示接受更新後的政策。</p>
+
+<hr>
+
+<footer>
+  <p><strong>聯絡方式</strong><br>
+  phinn@outlook.com</p>
+  <p class="muted">本政策適用於 KinetTask 的 macOS 與 iOS 版本。© 2026 KinetTask.</p>
+</footer>
+</article>
+
+<!-- ja -->
+<article class="lang-block" data-lang="ja" hidden>
+<header>
+  <h1>KinetTask プライバシーポリシー</h1>
+  <div class="sub">最終更新：2026 年 6 月 16 日</div>
+  <span class="badge">✓ データを一切収集しません</span>
+</header>
+
+<p>KinetTask は <strong>100% デバイス上で動作する</strong> AI タスク管理アプリです。本ポリシーでは、KinetTask があなたの情報をどのように扱うかを正直に説明します。要約すると：<strong>タスク・メモ・すべての AI 処理はあなたのデバイス上でのみ行われます。当社は何も収集せず、何もアップロードせず、誰も追跡しません。</strong></p>
+
+<div class="callout">
+  <strong>ひとことで：</strong>KinetTask にはアカウントもクラウドバックエンドも分析 SDK も広告もトラッキングもありません。唯一のネットワーク活動は、あなたが明示的にリクエストした公開モデルファイルのダウンロードです —— あなたのコンテンツをどこにも送信しません。
+</div>
+
+<h2>1. 収集する情報</h2>
+<p><strong>ありません。</strong>KinetTask は以下を含む一切の個人データを収集しません：</p>
+<ul>
+  <li>使用状況・分析データなし</li>
+  <li>クラッシュレポートなし（クラッシュレポート SDK 非統合）</li>
+  <li>広告トラッキング・ユーザープロファイリングなし（IDFA なし、デバイスフィンガープリントなし）</li>
+  <li>登録・ログイン不要 —— アカウントシステムが存在しません</li>
+  <li>タスク・メモ・タグ・入力した内容は一切アップロードされません</li>
+</ul>
+
+<h2>2. データの保存場所</h2>
+<p>すべてのタスクデータは、アプリのサンドボックスコンテナ内の<strong>デバイス上のローカルデータベース</strong>に保存されます：</p>
+<ul>
+  <li><span class="mono">tasks.sqlite3</span> — タスクデータ</li>
+  <li><span class="mono">search.sqlite3</span> — 全文検索インデックス（FTS5）</li>
+  <li><span class="mono">projects.sqlite3</span> — プロジェクトデータ</li>
+</ul>
+<p class="muted">macOS パス：<span class="mono">~/Library/Containers/com.kitnet.task.app/Data/Library/Application Support/KinetTask/</span><br>
+これらのファイルはあなたのものです。Time Machine や任意のバックアップツールでいつでもバックアップできます。</p>
+
+<h2>3. AI の仕組み（完全オンデバイス）</h2>
+<p>KinetTask の AI 機能（自然言語解析、タスク分解、関連タスク提案、デイリーインサイト）は<strong>完全にデバイス上で実行</strong>されます：</p>
+<ul>
+  <li><strong>Apple Foundation Models</strong> — システム内蔵のオンデバイスモデル（macOS 26 / iOS 26）。</li>
+  <li><strong>ローカル GGUF モデル（Llama.cpp）</strong> — あなたがダウンロードを選んだモデルがデバイス上のプロセス内で実行。</li>
+</ul>
+<p><strong>App Store 版はリモート（クラウド）AI を提供しません。</strong>タスク内容が AI 処理のためにデバイスを離れることはありません。モデルが未ロードの場合でも、KinetTask は内蔵ルールエンジンにフォールバックし、基本的な日付・優先度の解析を行います。</p>
+
+<h2>4. ネットワーク利用（正直に説明）</h2>
+<p>KinetTask はデフォルトでオフライン動作します。ネットワークリクエストが発生するのは、<strong>あなたがモデルファイルのダウンロードを明示的に行ったときのみ</strong>です。取得するのは<strong>公開されたオープンソースのモデルファイル</strong>で、あなたのデータは一切含まれていません：</p>
+
+<table class="net-table">
+  <tr><th>活動</th><th>通信？</th><th>詳細</th></tr>
+  <tr><td>タスクの作成・編集・削除、AI 解析、検索</td><td>いいえ</td><td>完全オフライン</td></tr>
+  <tr><td>GGUF モデルのダウンロード</td><td>はい</td><td>HuggingFace（必要に応じて hf-mirror.com ミラー）から公開モデルファイルを取得。あなたの操作でのみ発火。ユーザーデータは送信しません。</td></tr>
+</table>
+<p class="muted">上記を除き、KinetTask は一切のアウトバウンド接続を行いません。ソースコードは監査可能です。</p>
+
+<h2>5. システム権限</h2>
+<p>KinetTask はカメラ・マイク・位置情報・連絡先・写真・ヘルスケアその他の機密性の高いシステム権限を<strong>要求しません</strong>。ファイルピッカーでローカル GGUF モデルを取り込む場合、アプリはあなたが許可した範囲内でそのファイルのみを読み取ります。</p>
+
+<h2>6. サードパーティコンポーネント</h2>
+<p>KinetTask は以下のオープンソースコンポーネントを使用しています。いずれもデータを送信しません：</p>
+<ul>
+  <li><strong>LocalLLMKit</strong>（MIT）— ローカル LLM 推理抽象化レイヤー、オンデバイス実行。</li>
+  <li><strong>SQLite.swift</strong>（MIT）— ローカルデータベースラッパー。</li>
+  <li><strong>Apple FoundationModels</strong>（システムフレームワーク）— オンデバイス AI。</li>
+</ul>
+<p>ダウンロードされるモデルはオープンウェイトモデル（Qwen2.5 / Qwen3 など）であり、各オープンソースライセンスに従います。</p>
+
+<h2>7. データセキュリティ</h2>
+<p>すべてのデータはローカルアプリサンドボックス内に保存され、macOS / iOS のアプリサンドボックスとシステム暗号化によって保護されるため、あなたのデータが当社や第三者のサーバーに送信されるリスクはありません。App Sandbox と Hardened Runtime が有効です。</p>
+
+<h2>8. あなたの権利（データはあなたのもの）</h2>
+<ul>
+  <li><strong>エクスポート</strong>：あなたのデータは上記のローカルデータベースファイルそのものです —— いつでもコピーしてバックアップできます。</li>
+  <li><strong>削除</strong>：アプリ内でタスクを削除するか、アプリをアンインストールすれば全データが完全に消去されます。</li>
+  <li><strong>アカウント削除の必要なし</strong>：KinetTask にアカウントはないため、アカウント削除手続きは存在しません。</li>
+</ul>
+
+<h2>9. 子ども</h2>
+<p>KinetTask は 13 歳未満の子どもを対象としておらず、子どもからの情報を意図的に収集することはありません。App Store の年齢制限は 4+ です。</p>
+
+<h2>10. iCloud 同期</h2>
+<p><strong>現在のバージョン（1.x）は iCloud 同期を提供しません。</strong>関連コードは存在しますがデフォルトで無効です。将来のバージョンで提供される場合、同期はあなたの Apple ID 配下の iCloud プライベートデータベースを通じて行われ、Apple によりエンドツーエンドで暗号化され、<strong>あなたが明示的に有効化した場合にのみ</strong>発生します。その際は事前に本ポリシーを更新します。システム設定でいつでもオフにできます。</p>
+
+<h2>11. ポリシーの変更</h2>
+<p>本ポリシーに重要な変更がある場合は、アプリのアップデートまたは本ページでお知らせします。継続的な使用は更新後のポリシーへの同意を意味します。</p>
+
+<hr>
+
+<footer>
+  <p><strong>連絡先</strong><br>
+  phinn@outlook.com</p>
+  <p class="muted">本ポリシーは KinetTask の macOS 版および iOS 版に適用されます。© 2026 KinetTask.</p>
+</footer>
+</article>
 
 </div>
+
+<script>
+  const I18N_P={
+    'en':'KinetTask — Privacy Policy',
+    'zh-Hans':'KinetTask — 隐私政策',
+    'zh-Hant':'KinetTask — 隱私政策',
+    'ja':'KinetTask — プライバシーポリシー'
+  };
+  const LANG_KEY='kt_privacy_lang';
+  function applyLang(lang){
+    document.querySelectorAll('.lang-block').forEach(b=>{b.hidden=(b.dataset.lang!==lang);});
+    if(I18N_P[lang])document.title=I18N_P[lang];
+    const html=document.documentElement;
+    html.lang=(lang==='zh-Hans')?'zh-CN':lang;
+    document.querySelectorAll('#langSw button').forEach(b=>b.classList.toggle('on',b.dataset.lang===lang));
+    try{localStorage.setItem(LANG_KEY,lang);}catch(e){}
+  }
+  document.getElementById('langSw').addEventListener('click',e=>{
+    const b=e.target.closest('button[data-lang]');
+    if(b)applyLang(b.dataset.lang);
+  });
+  let initial='en';
+  try{
+    const saved=localStorage.getItem(LANG_KEY);
+    if(saved&&I18N_P[saved])initial=saved;
+  }catch(e){}
+  applyLang(initial);
+</script>
 </body>
 </html>
