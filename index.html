@@ -193,6 +193,15 @@
 
   /* states strip */
   .states{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top:10px}
+  /* showcase 双端截图 */
+  .shots{max-width:var(--maxw);margin:0 auto;display:grid;grid-template-columns:1.55fr .9fr;gap:22px;align-items:end}
+  .shot{background:var(--surface);border:1px solid var(--border-strong);border-radius:20px;padding:14px;box-shadow:0 30px 70px -30px rgba(0,0,0,.55)}
+  .shot img{width:100%;display:block;border-radius:12px}
+  .shot-desktop img{aspect-ratio:16/10;object-fit:cover;object-position:top}
+  .shot-phone img{aspect-ratio:9/16;object-fit:cover;object-position:top}
+  .shot-cap{font-size:13px;color:var(--text-dim);padding:12px 6px 4px;text-align:center}
+  .shot-cap b{color:var(--text)}
+  @media(max-width:860px){.shots{grid-template-columns:1fr}.shot-phone{max-width:340px;margin:0 auto;width:100%}}
   .state{display:flex;align-items:center;gap:9px;padding:12px 18px;border-radius:12px;border:1px solid var(--border);background:var(--surface);font-weight:600;font-size:14px}
   .state .si{font-size:16px}
 
@@ -279,7 +288,7 @@
 <section class="lang-block" data-lang="zh-Hans" hidden>
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-badge"><span class="dot"></span> Local AI Task Manager · 完全离线 · 即将上架</div>
+  <div class="hero-badge"><span class="dot"></span> Local AI Task Manager · 完全离线 · 已上架 App Store</div>
   <h1>让你的任务库<br><span class="grad">真正懂你</span></h1>
   <p class="sub">KinetTask 是一款<b>本地优先</b>的 AI 任务管理器。一句话变任务, <b>Apple Foundation Models 设备端推理</b>, 0 上传 0 追踪。比 Reminders 聪明, 比 Todoist 私密, 比 Things 懂你。</p>
   <div class="hero-cta">
@@ -292,7 +301,7 @@
   <div class="hero-trust">
     <span class="t"><span class="ic">🔒</span> 0 上传</span>
     <span class="t"><span class="ic">🤖</span> 设备端 AI</span>
-    <span class="t"><span class="ic">💎</span> 免费 · 无限任务</span>
+    <span class="t"><span class="ic">💎</span> 免费 · 含 50 条任务</span>
     <span class="t"><span class="ic">📱</span> iPhone + Mac</span>
   </div>
 
@@ -583,12 +592,31 @@
   </div>
 </section>
 
-<!-- FINAL CTA -->
+<!-- SHOWCASE -->
+<section>
+  <div class="center reveal section-head">
+    <div class="eyebrow" style="justify-content:center">iPhone &amp; Mac</div>
+    <h2>原生双端, <span class="accent">同一套任务库</span></h2>
+    <p class="lede" style="margin:0 auto">SwiftUI 原生构建, 不是 Electron 套壳。手机捕获, 电脑深加工 —— 数据在你设备上, 从不联网。</p>
+  </div>
+  <div class="shots reveal">
+    <div class="shot shot-desktop">
+      <img src="shots/mac-today.jpg" alt="KinetTask for Mac" loading="lazy">
+      <div class="shot-cap"><b>Mac</b> · Today / Upcoming / Anytime, 键盘流操作</div>
+    </div>
+    <div class="shot shot-phone">
+      <img src="shots/iphone-onboarding.jpg" alt="KinetTask for iPhone" loading="lazy">
+      <div class="shot-cap"><b>iPhone</b> · 30 秒上手, 一句话建任务</div>
+    </div>
+  </div>
+</section>
+<!-- /SHOWCASE -->
+
 <section>
   <div class="final reveal">
     <div class="ic">✓<img src="app-icon.png" alt=""></div>
     <h2>准备好, <span class="accent">让任务库懂你了</span></h2>
-    <p class="sub">聪明、私密、免费。即将上架 App Store。</p>
+    <p class="sub">聪明、私密、免费。已上架 App Store。</p>
     <div class="final-cta">
       <!-- App Store ID: 6780944289 已上架 (2026-09)。 -->
       <a class="btn btn-apple btn-lg" href="https://apps.apple.com/app/id6780944289">
@@ -616,7 +644,7 @@
   <div class="hero-trust">
     <span class="t"><span class="ic">🔒</span> 0 上傳</span>
     <span class="t"><span class="ic">🤖</span> 設備端 AI</span>
-    <span class="t"><span class="ic">💎</span> 免費 · 無限任務</span>
+    <span class="t"><span class="ic">💎</span> 免費 · 含 50 條任務</span>
     <span class="t"><span class="ic">📱</span> iPhone + Mac</span>
   </div>
 
@@ -899,6 +927,26 @@
   </div>
 </section>
 
+<!-- SHOWCASE -->
+<section>
+  <div class="center reveal section-head">
+    <div class="eyebrow" style="justify-content:center">iPhone &amp; Mac</div>
+    <h2>原生雙端, <span class="accent">同一套任務庫</span></h2>
+    <p class="lede" style="margin:0 auto">SwiftUI 原生構建, 不是 Electron 套殼。手機捕獲, 電腦深加工 —— 數據在你設備上, 從不聯網。</p>
+  </div>
+  <div class="shots reveal">
+    <div class="shot shot-desktop">
+      <img src="shots/mac-today.jpg" alt="KinetTask for Mac" loading="lazy">
+      <div class="shot-cap"><b>Mac</b> · Today / Upcoming / Anytime, 鍵盤流操作</div>
+    </div>
+    <div class="shot shot-phone">
+      <img src="shots/iphone-onboarding.jpg" alt="KinetTask for iPhone" loading="lazy">
+      <div class="shot-cap"><b>iPhone</b> · 30 秒上手, 一句話建任務</div>
+    </div>
+  </div>
+</section>
+<!-- /SHOWCASE -->
+
 <section>
   <div class="final reveal">
     <div class="ic">✓<img src="app-icon.png" alt=""></div>
@@ -930,7 +978,7 @@
   <div class="hero-trust">
     <span class="t"><span class="ic">🔒</span> 0 upload</span>
     <span class="t"><span class="ic">🤖</span> On-device AI</span>
-    <span class="t"><span class="ic">💎</span> Free · Unlimited tasks</span>
+    <span class="t"><span class="ic">💎</span> Free · 50 tasks included</span>
     <span class="t"><span class="ic">📱</span> iPhone + Mac</span>
   </div>
 
@@ -1213,6 +1261,26 @@
   </div>
 </section>
 
+<!-- SHOWCASE -->
+<section>
+  <div class="center reveal section-head">
+    <div class="eyebrow" style="justify-content:center">iPhone &amp; Mac</div>
+    <h2>Native on both. <span class="accent">One task library</span></h2>
+    <p class="lede" style="margin:0 auto">Built with SwiftUI — not an Electron shell. Capture on iPhone, go deep on Mac. Your data stays on your devices, always.</p>
+  </div>
+  <div class="shots reveal">
+    <div class="shot shot-desktop">
+      <img src="shots/mac-today.jpg" alt="KinetTask for Mac" loading="lazy">
+      <div class="shot-cap"><b>Mac</b> · Today / Upcoming / Anytime, full keyboard flow</div>
+    </div>
+    <div class="shot shot-phone">
+      <img src="shots/iphone-onboarding.jpg" alt="KinetTask for iPhone" loading="lazy">
+      <div class="shot-cap"><b>iPhone</b> · Up and running in 30 seconds</div>
+    </div>
+  </div>
+</section>
+<!-- /SHOWCASE -->
+
 <section>
   <div class="final reveal">
     <div class="ic">✓<img src="app-icon.png" alt=""></div>
@@ -1244,7 +1312,7 @@
   <div class="hero-trust">
     <span class="t"><span class="ic">🔒</span> アップロード 0</span>
     <span class="t"><span class="ic">🤖</span> オンデバイス AI</span>
-    <span class="t"><span class="ic">💎</span> 無料 · タスク無制限</span>
+    <span class="t"><span class="ic">💎</span> 無料 · タスク 50 件まで</span>
     <span class="t"><span class="ic">📱</span> iPhone + Mac</span>
   </div>
 
@@ -1527,11 +1595,31 @@
   </div>
 </section>
 
+<!-- SHOWCASE -->
+<section>
+  <div class="center reveal section-head">
+    <div class="eyebrow" style="justify-content:center">iPhone &amp; Mac</div>
+    <h2>ネイティブ双対応, <span class="accent">同一のタスクライブラリ</span></h2>
+    <p class="lede" style="margin:0 auto">Electron シェルではなく SwiftUI ネイティブ。iPhone で捕捉、Mac で本格処理 —— データはあなたのデバイスから出ません。</p>
+  </div>
+  <div class="shots reveal">
+    <div class="shot shot-desktop">
+      <img src="shots/mac-today.jpg" alt="KinetTask for Mac" loading="lazy">
+      <div class="shot-cap"><b>Mac</b> · Today / Upcoming / Anytime, キーボード操作</div>
+    </div>
+    <div class="shot shot-phone">
+      <img src="shots/iphone-onboarding.jpg" alt="KinetTask for iPhone" loading="lazy">
+      <div class="shot-cap"><b>iPhone</b> · 30 秒で使い始められる</div>
+    </div>
+  </div>
+</section>
+<!-- /SHOWCASE -->
+
 <section>
   <div class="final reveal">
     <div class="ic">✓<img src="app-icon.png" alt=""></div>
     <h2>準備はいいですか、<span class="accent">タスクがあなたを理解する時代へ</span></h2>
-    <p class="sub">賢く、プライベート、無料。まもなく App Store に登場。</p>
+    <p class="sub">賢く、プライベート、無料。App Store で公開中。</p>
     <div class="final-cta">
       <a class="btn btn-apple btn-lg" href="https://apps.apple.com/app/id6780944289">
         <svg width="16" height="18" viewBox="0 0 384 512" fill="currentColor"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
