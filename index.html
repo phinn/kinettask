@@ -202,6 +202,28 @@
   .shot-cap{font-size:13px;color:var(--text-dim);padding:12px 6px 4px;text-align:center}
   .shot-cap b{color:var(--text)}
   @media(max-width:860px){.shots{grid-template-columns:1fr}.shot-phone{max-width:340px;margin:0 auto;width:100%}}
+  /* 图文说明组件: 图 + 说明列表 */
+  .feat-visual{max-width:var(--maxw);margin:34px auto 0;display:grid;grid-template-columns:1.25fr 1fr;gap:34px;align-items:center}
+  .feat-visual .fv-img{background:var(--surface);border:1px solid var(--border-strong);border-radius:18px;padding:12px;box-shadow:0 30px 70px -30px rgba(0,0,0,.55)}
+  .feat-visual .fv-img img{width:100%;display:block;border-radius:10px}
+  .feat-visual .fv-cap{font-size:12.5px;color:var(--text-dim);text-align:center;padding-top:10px}
+  .feat-visual ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:16px}
+  .feat-visual li{display:flex;gap:12px;align-items:flex-start;font-size:15px;line-height:1.55;color:var(--text-dim)}
+  .feat-visual li b{color:var(--text)}
+  .feat-visual li .n{flex:0 0 26px;height:26px;border-radius:8px;display:grid;place-items:center;font-size:13px;font-weight:600;background:var(--grad);color:#fff}
+  @media(max-width:860px){.feat-visual{grid-template-columns:1fr;gap:20px}}
+  /* 隐私区审计说明行 */
+  .audit-steps{max-width:720px;margin:26px auto 0;display:flex;flex-direction:column;gap:12px;text-align:left}
+  .audit-steps .as{display:flex;gap:10px;align-items:baseline;font-size:14.5px;color:var(--text-dim);line-height:1.55}
+  .audit-steps .as b{color:var(--text)}
+  .audit-steps .as .dot2{flex:0 0 7px;height:7px;border-radius:50%;background:var(--green);position:relative;top:-1px}
+  /* 六段状态区真机图 */
+  .states-visual{max-width:1080px;margin:30px auto 0;display:grid;grid-template-columns:1.35fr 1fr;gap:30px;align-items:center}
+  .states-visual .sv-img{background:var(--surface);border:1px solid var(--border-strong);border-radius:18px;padding:12px;box-shadow:0 30px 70px -30px rgba(0,0,0,.55)}
+  .states-visual img{width:100%;display:block;border-radius:10px}
+  .states-visual .sv-note{font-size:14.5px;color:var(--text-dim);line-height:1.6}
+  .states-visual .sv-note b{color:var(--text)}
+  @media(max-width:860px){.states-visual{grid-template-columns:1fr;gap:20px}}
   .state{display:flex;align-items:center;gap:9px;padding:12px 18px;border-radius:12px;border:1px solid var(--border);background:var(--surface);font-weight:600;font-size:14px}
   .state .si{font-size:16px}
 
@@ -236,8 +258,9 @@
   .foot-col a:hover{color:var(--text)}
   .foot-bottom{max-width:var(--maxw);margin:48px auto 0;padding:24px 28px 0;border-top:1px solid var(--border);display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;font-size:12.5px;color:var(--text-faint)}
 
-  .reveal{opacity:0;transform:translateY(28px);transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1)}
-  .reveal.in{opacity:1;transform:none}
+  html.js .reveal{opacity:0;transform:translateY(28px);transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1)}
+  html.js .reveal.in{opacity:1;transform:none}
+  @media (prefers-reduced-motion:reduce){html.js .reveal{opacity:1;transform:none;transition:none}}
 
   @media(max-width:880px){
     .g3,.cmp,.priv-grid{grid-template-columns:1fr}
@@ -479,6 +502,23 @@
     </div>
   </div>
 </section>
+<!-- ENGINE VISUAL -->
+  <div class="feat-visual reveal">
+    <div class="fv-img">
+      <img src="shots/mac-pro.jpg" alt="KinetTask AI engine settings" loading="lazy">
+      <div class="fv-cap">设置 · AI 引擎与 Pro 能力(本地模型下载 / 任务拆解 / 推理搜索)</div>
+    </div>
+    <div>
+      <h3 style="margin:0 0 6px;font-size:19px"><b>三层引擎</b>怎么工作</h3>
+      <ul>
+        <li><span class="n">1</span><span><b>macOS 26 / iOS 26</b> · 直接调用系统内置的 Apple Foundation Models,零下载零配置,推理不出进程</span></li>
+        <li><span class="n">2</span><span><b>其他设备</b> · 在设置里下载你选的 GGUF 模型,Llama.cpp 进程内跑,依旧不联网</span></li>
+        <li><span class="n">3</span><span><b>无模型可跑</b> · 内置规则解析兜底 —— "明天下午3点开会"照拆不误,AI 永远点得亮</span></li>
+      </ul>
+    </div>
+  </div>
+<!-- /ENGINE VISUAL -->
+
 
 <!-- PRIVACY MANIFESTO -->
 <section id="privacy">
@@ -505,6 +545,12 @@
       </div>
     </div>
     <div class="audit">🔍 应用内「隐私审计」面板: 任务数、数据库大小、模型大小, 一目了然</div>
+    <div class="audit-steps reveal">
+      <div class="as"><span class="dot2"></span><span><b>打开「隐私审计」面板</b> —— 任务数、数据库大小、模型占用,全部真实数据摆在明面上</span></div>
+      <div class="as"><span class="dot2"></span><span><b>查看网络权限</b> —— 沙盒配置里没有网络客户端 entitlement —— 想上传也没有通道</span></div>
+      <div class="as"><span class="dot2"></span><span><b>抓包验证</b> —— 开 Proxy/Charles 跑一圈,除了 App Store 更新检查,零请求</span></div>
+    </div>
+
   </div>
 </section>
 
@@ -557,6 +603,13 @@
     <span class="state"><span class="si">✅</span> 已完成</span>
   </div>
 </section>
+<!-- DESIGN VISUAL -->
+  <div class="states-visual reveal">
+    <div class="sv-img"><img src="shots/mac-today-zh.jpg" alt="KinetTask for Mac — real UI" loading="lazy"></div>
+    <div class="sv-note"><b>六个状态就是全部。</b>收件箱进、今天做、即将排队、任何时候池、也许将来冷藏、已完成归档 —— 没有嵌套面板,没有隐藏菜单。拖一下改状态,⌘K 全局搜索,回车建下一条。这个页面截图就是 Mac 版实拍。</div>
+  </div>
+<!-- /DESIGN VISUAL -->
+
 
 <!-- FAQ -->
 <section id="faq">
@@ -818,6 +871,23 @@
     </div>
   </div>
 </section>
+<!-- ENGINE VISUAL -->
+  <div class="feat-visual reveal">
+    <div class="fv-img">
+      <img src="shots/mac-pro.jpg" alt="KinetTask AI engine settings" loading="lazy">
+      <div class="fv-cap">設定 · AI 引擎與 Pro 能力(本地模型下載 / 任務拆解 / 推論搜尋)</div>
+    </div>
+    <div>
+      <h3 style="margin:0 0 6px;font-size:19px"><b>三層引擎</b>怎麼工作</h3>
+      <ul>
+        <li><span class="n">1</span><span><b>macOS 26 / iOS 26</b> · 直接調用系統內置的 Apple Foundation Models,零下載零配置,推理不出進程</span></li>
+        <li><span class="n">2</span><span><b>其他設備</b> · 在設定裡下載你選的 GGUF 模型,Llama.cpp 進程內跑,依舊不聯網</span></li>
+        <li><span class="n">3</span><span><b>無模型可跑</b> · 內置規則解析兜底 ——「明天下午3點開會」照拆不誤,AI 永遠點得亮</span></li>
+      </ul>
+    </div>
+  </div>
+<!-- /ENGINE VISUAL -->
+
 
 <section id="privacy-zh-Hant">
   <div class="privacy reveal">
@@ -843,6 +913,12 @@
       </div>
     </div>
     <div class="audit">🔍 應用內「隱私稽核」面板: 任務數、資料庫大小、模型大小, 一目了然</div>
+    <div class="audit-steps reveal">
+      <div class="as"><span class="dot2"></span><span><b>打開「隱私審計」面板</b> —— 任務數、資料庫大小、模型佔用,全部真實數據擺在明面上</span></div>
+      <div class="as"><span class="dot2"></span><span><b>查看網路權限</b> —— 沙盒配置裡沒有網路客戶端 entitlement —— 想上傳也沒有通道</span></div>
+      <div class="as"><span class="dot2"></span><span><b>抓包驗證</b> —— 開 Proxy/Charles 跑一圈,除了 App Store 更新檢查,零請求</span></div>
+    </div>
+
   </div>
 </section>
 
@@ -893,6 +969,13 @@
     <span class="state"><span class="si">✅</span> 已完成</span>
   </div>
 </section>
+<!-- DESIGN VISUAL -->
+  <div class="states-visual reveal">
+    <div class="sv-img"><img src="shots/mac-today-zh.jpg" alt="KinetTask for Mac — real UI" loading="lazy"></div>
+    <div class="sv-note"><b>六個狀態就是全部。</b>收件匣進、今天做、即將排隊、任何時候池、也許將來冷藏、已完成歸檔 —— 沒有巢狀面板,沒有隱藏選單。拖一下改狀態,⌘K 全域搜尋,回車建下一條。這個頁面截圖就是 Mac 版實拍。</div>
+  </div>
+<!-- /DESIGN VISUAL -->
+
 
 <section id="faq-zh-Hant">
   <div class="center reveal section-head">
@@ -1152,6 +1235,23 @@
     </div>
   </div>
 </section>
+<!-- ENGINE VISUAL -->
+  <div class="feat-visual reveal">
+    <div class="fv-img">
+      <img src="shots/mac-pro.jpg" alt="KinetTask AI engine settings" loading="lazy">
+      <div class="fv-cap">Settings · AI engine & Pro capabilities (local model download / task breakdown / reasoning search)</div>
+    </div>
+    <div>
+      <h3 style="margin:0 0 6px;font-size:19px">How the <b>three-tier engine</b> works</h3>
+      <ul>
+        <li><span class="n">1</span><span><b>macOS 26 / iOS 26</b> · Uses the system-built-in Apple Foundation Models — zero download, inference never leaves the process</span></li>
+        <li><span class="n">2</span><span><b>Other devices</b> · Download a GGUF model of your choice in Settings; Llama.cpp runs it in-process, still offline</span></li>
+        <li><span class="n">3</span><span><b>No model at all</b> · The built-in rule parser takes over — "standup tomorrow 3pm" still parses. AI is always available</span></li>
+      </ul>
+    </div>
+  </div>
+<!-- /ENGINE VISUAL -->
+
 
 <section id="privacy-en">
   <div class="privacy reveal">
@@ -1177,6 +1277,12 @@
       </div>
     </div>
     <div class="audit">🔍 In-app "Privacy Audit" panel: task count, database size, model size — all at a glance</div>
+    <div class="audit-steps reveal">
+      <div class="as"><span class="dot2"></span><span><b>Open the in-app Privacy Audit panel</b> —— Task count, database size, model footprint — all real numbers, nothing hidden</span></div>
+      <div class="as"><span class="dot2"></span><span><b>Check sandbox entitlements</b> —— No network-client entitlement is requested — even if it wanted to, it cannot phone home</span></div>
+      <div class="as"><span class="dot2"></span><span><b>Verify with a packet sniffer</b> —— Run Proxy/Charles around a full session: zero requests except App Store update checks</span></div>
+    </div>
+
   </div>
 </section>
 
@@ -1227,6 +1333,13 @@
     <span class="state"><span class="si">✅</span> Done</span>
   </div>
 </section>
+<!-- DESIGN VISUAL -->
+  <div class="states-visual reveal">
+    <div class="sv-img"><img src="shots/mac-today-zh.jpg" alt="KinetTask for Mac — real UI" loading="lazy"></div>
+    <div class="sv-note"><b>Six states, that's the whole model.</b> Inbox in, Today to do, Upcoming queued, Anytime pool, Someday cold storage, Done archived — no nested panels, no hidden menus. Drag to change state, ⌘K to search, Enter for the next task. This screenshot is the real Mac app.</div>
+  </div>
+<!-- /DESIGN VISUAL -->
+
 
 <section id="faq-en">
   <div class="center reveal section-head">
@@ -1486,6 +1599,23 @@
     </div>
   </div>
 </section>
+<!-- ENGINE VISUAL -->
+  <div class="feat-visual reveal">
+    <div class="fv-img">
+      <img src="shots/mac-pro.jpg" alt="KinetTask AI engine settings" loading="lazy">
+      <div class="fv-cap">設定 · AI エンジンと Pro 機能(ローカルモデル / タスク分解 / 推論検索)</div>
+    </div>
+    <div>
+      <h3 style="margin:0 0 6px;font-size:19px"><b>3層エンジン</b>の仕組み</h3>
+      <ul>
+        <li><span class="n">1</span><span><b>macOS 26 / iOS 26</b> · システム内蔵の Apple Foundation Models を直接利用。ダウンロード不要、推論はプロセス外に出ません</span></li>
+        <li><span class="n">2</span><span><b>その他のデバイス</b> · 設定で好きな GGUF モデルをダウンロード。Llama.cpp がプロセス内で実行、オフラインのまま</span></li>
+        <li><span class="n">3</span><span><b>モデルが無い場合</b> · 内蔵ルールパーサーがフォールバック ——「明日15時に会議」も正しく分解。AI は常に使えます</span></li>
+      </ul>
+    </div>
+  </div>
+<!-- /ENGINE VISUAL -->
+
 
 <section id="privacy-ja">
   <div class="privacy reveal">
@@ -1511,6 +1641,12 @@
       </div>
     </div>
     <div class="audit">🔍 アプリ内「プライバシー監査」パネル: タスク数・DB サイズ・モデルサイズをひと目で確認</div>
+    <div class="audit-steps reveal">
+      <div class="as"><span class="dot2"></span><span><b>アプリ内「プライバシー監査」を開く</b> —— タスク数・DB サイズ・モデル容量 —— 実数がそのまま表示されます</span></div>
+      <div class="as"><span class="dot2"></span><span><b>サンドボックス権限を確認</b> —— ネットワーククライアント entitlememt は要求していません —— 送信経路そのものが存在しません</span></div>
+      <div class="as"><span class="dot2"></span><span><b>パケットキャプチャで検証</b> —— Proxy/Charles で一連の操作を監視 —— App Store の更新確認以外、リクエスト 0</span></div>
+    </div>
+
   </div>
 </section>
 
@@ -1561,6 +1697,13 @@
     <span class="state"><span class="si">✅</span> 完了</span>
   </div>
 </section>
+<!-- DESIGN VISUAL -->
+  <div class="states-visual reveal">
+    <div class="sv-img"><img src="shots/mac-today-zh.jpg" alt="KinetTask for Mac — real UI" loading="lazy"></div>
+    <div class="sv-note"><b>6つのステータスですべて。</b>受信箱 → 今日 → 予定 → いつか → バックログ → 完了。入れ子パネルも隠しメニューもなし。ドラッグでステータス変更、⌘K で検索、Enter で次のタスク。このスクリーンショットは Mac 版の実写です。</div>
+  </div>
+<!-- /DESIGN VISUAL -->
+
 
 <section id="faq-ja">
   <div class="center reveal section-head">
@@ -1667,6 +1810,10 @@
 </footer>
 
 <script>
+  // 渐进增强: 仅在 JS 可用且 IO 可用时才启用 reveal 动画, 否则内容永远可见
+  (function(){var d=document.documentElement;if('IntersectionObserver' in window)d.classList.add('js');})();
+</script>
+<script>
   // ===== i18n: nav/footer/title 文案 + 语言切换 =====
   const I18N={
     'zh-Hans':{nav1:'功能',nav2:'自然语言',nav3:'隐私',nav4:'对比',nav5:'FAQ',foot1:'本地优先的 AI 任务管理器。比 Reminders 聪明, 比 Todoist 私密, 比 Things 懂你。',footH1:'产品',footA1:'功能',footA2:'自然语言',footA3:'三层引擎',footA4:'设计',footH2:'关于',footA5:'隐私承诺',footA6:'竞品对比',footA7:'常见问题',footA8:'隐私政策',footH3:'获取',footA9:'App Store',footA10:'联系开发者',title:'KinetTask — 本地 AI 任务管理 · 完全离线 · 0 上传'},
@@ -1699,9 +1846,13 @@
   }catch(e){}
   applyLang(initialLang);
 
-  // scroll reveal
+  // scroll reveal(仅 html.js 时生效; 兜底: 2.5s 后强制点亮所有未触发项, 防止 IO 在后台标签/截图场景失灵)
   const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.12,rootMargin:'0px 0px -40px 0px'});
   document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+  // 兜底: IO 失灵(后台标签/嵌入截图/爬虫)时也绝不永久隐藏。双保险:
+  const forceReveal=()=>document.querySelectorAll('.reveal:not(.in)').forEach(el=>el.classList.add('in'));
+  window.addEventListener('load',()=>setTimeout(forceReveal,1500));
+  setTimeout(forceReveal,3000);
 
   // nav active highlight
   const links=[...document.querySelectorAll('.nav-links a')];
